@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "4f071b994510c3d37887f0b502a75278",
+    "hash": "af988533673a407c294df670dfa63039",
     "packages": [
         {
             "name": "filp/whoops",
@@ -1391,16 +1391,16 @@
         },
         {
             "name": "stripe/stripe-php",
-            "version": "dev-master",
+            "version": "v1.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stripe/stripe-php.git",
-                "reference": "66d8b3139f7c11761d3ff33807210f7eedb78fbe"
+                "reference": "1506a8eedb31b523a3b4a38a3b0df60fd5fde69b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/66d8b3139f7c11761d3ff33807210f7eedb78fbe",
-                "reference": "66d8b3139f7c11761d3ff33807210f7eedb78fbe",
+                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/1506a8eedb31b523a3b4a38a3b0df60fd5fde69b",
+                "reference": "1506a8eedb31b523a3b4a38a3b0df60fd5fde69b",
                 "shasum": ""
             },
             "require": {
@@ -1435,7 +1435,7 @@
                 "payment processing",
                 "stripe"
             ],
-            "time": "2014-04-10 19:45:16"
+            "time": "2014-04-10 07:01:37"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -2847,7 +2847,6 @@
     "stability-flags": {
         "message/cog-mothership-commerce": 20,
         "message/cog-mothership-ecommerce": 20,
-        "stripe/stripe-php": 20,
         "mockery/mockery": 20
     },
     "platform": {

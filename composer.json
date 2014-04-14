@@ -33,7 +33,7 @@
 		"message/cog-mothership-commerce" : "dev-feature/payment-refactor as 2.1.0",
 		"message/cog-mothership-ecommerce": "dev-feature/payment-refactor as 1.4.0",
 
-		"stripe/stripe-php"               : "dev-master"
+		"stripe/stripe-php"               : "~1.13"
 	},
 	"require-dev": {
 		"mockery/mockery": "dev-master"
