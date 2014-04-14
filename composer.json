@@ -1,0 +1,43 @@
+{
+	"name": "message/cog-mothership-stripe",
+	"description": "Cog module for the Stripe gateway in Mothership",
+	"keywords": ["stripe", "mothership", "cog"],
+	"homepage": "http://message.co.uk",
+	"license": "proprietary",
+	"authors": [
+		{
+			"name" : "The Message Development Team",
+			"email": "dev@message.co.uk"
+		}
+	],
+	"support": {
+		"wiki"  : "http://server.local/wiki/projects/cog",
+		"issues": "http://github.com/messagedigital/cog-mothership-stripe/issues"
+	},
+	"autoload": {
+		"psr-4": {
+			"Message\\Mothership\\SagePay\\"      : "src",
+			"Message\\Mothership\\SagePay\\Test\\": "tests"
+		}
+	},
+	"repositories": [
+		{
+			"type": "composer",
+			"url" : "http://packages.message.co.uk"
+		}
+	],
+	"require": {
+		"php": ">=5.4.0",
+
+		"message/cog"                     : "~3.0",
+		"message/cog-mothership-commerce" : "dev-feature/payment-refactor as 2.1.0",
+		"message/cog-mothership-ecommerce": "dev-feature/payment-refactor as 1.4.0",
+
+		"stripe/stripe-php"               : "dev-master as 1.0.0"
+	},
+	"require-dev": {
+		"mockery/mockery": "dev-master"
+	},
+	"suggest": {
+	}
+}

@@ -1,7 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: thomas
- * Date: 14/04/2014
- * Time: 10:53
- */
+
+namespace Message\Mothership\Stripe\Controller;
+
+use Message\Cog\Controller\Controller;
+use Message\Mothership\Commerce\Payable\PayableInterface;
+use Message\Mothership\Ecommerce\Controller\Gateway\RefundControllerInterface;
+
+class Refund extends Controller implements RefundControllerInterface
+{
+	public function refund(PayableInterface $refund, array $stages, array $options = null)
+	{}
+}
