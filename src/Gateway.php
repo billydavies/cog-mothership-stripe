@@ -13,9 +13,13 @@ use Message\Mothership\Ecommerce\Gateway\GatewayInterface;
  */
 class Gateway implements GatewayInterface
 {
-	public function __construct()
-	{
+	protected $_publishableKey;
+	protected $_secretKey;
 
+	public function __construct($secretKey, $publishableKey)
+	{
+		$this->_setSecretKey($secretKey);
+		$this->_setPublishableKey($publishableKey);
 	}
 
 	/**
@@ -40,5 +44,21 @@ class Gateway implements GatewayInterface
 	public function getRefundControllerReference()
 	{
 		return 'Message:Mothership:Stripe::ControllerRefund#refund';
+	}
+
+	public function getPublishableKey()
+	{
+		return $this->_publishableKey;
+	}
+
+	protected function _setPublishableKey($publishableKey)
+	{
+		$this->_publishableKey = $publishableKey;
+	}
+
+	protected function _setSecretKey($secretKey)
+	{
+		\Stripe::setApiKey($secretKey);
+		$this->_secretKey = $secretKey;
 	}
 }
