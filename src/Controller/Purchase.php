@@ -17,11 +17,11 @@ class Purchase extends Controller implements PurchaseControllerInterface
 {
 	public function purchase(PayableInterface $payable, array $stages, array $options = null)
 	{
-		try {
-			$form = $this->get('stripe.checkout.form');
-		}
-		catch (\Exception $e) {
+		$form = $this->get('stripe.checkout.form');
 
-		}
+		return $this->render('Message:Mothership:Stripe::checkout', [
+			'form'           => $form,
+			'publishableKey' => $this->get('gateway.adapter.stripe')->getPublishableKey(),
+		]);
 	}
 }

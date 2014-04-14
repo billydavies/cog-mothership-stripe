@@ -1,7 +1,26 @@
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<script type="text/javascript">
+	Stripe.setPublishableKey({{ publishableKey }});
+
+	jQuery(function($) {
+		$('#payment-form').submit(function(event) {
+			var $form = $(this);
+
+			// Disable the submit button to prevent repeated clicks
+			$form.find('button').prop('disabled', true);
+
+			Stripe.card.createToken($form, stripeResponseHandler);
+
+			// Prevent the form from submitting with the default action
+			return false;
+		});
+	});
+</script>
+
 {{ form_start(form) }}
-	{{ form_widget(form['number']) }}
-	{{ form_widget(form['cvc']) }}
-	{{ form_widget(form['exp-month']) }}
-	{{ form_widget(form['exp-year']) }}
+	{{ form_widget(form['number'], { 'name': null }) }}
+	{{ form_widget(form['cvc'], { 'name': null }) }}
+	{{ form_widget(form['exp-month'], { 'name': null }) }}
+	{{ form_widget(form['exp-year'], { 'name': null }) }}
 	<button type="submit">Submit Payment</button>
 {{ form_end(form) }}

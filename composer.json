@@ -30,7 +30,7 @@
 		"php": ">=5.4.0",
 
 		"message/cog"                     : "~3.0",
-		"message/cog-mothership-commerce" : "dev-compatibility-types-and-loading as 2.1.0",
+		"message/cog-mothership-commerce" : "dev-compatibility-types-loading-payments as 2.1.0",
 		"message/cog-mothership-ecommerce": "dev-feature/payment-refactor as 1.4.0",
 
 		"stripe/stripe-php"               : "~1.13"
