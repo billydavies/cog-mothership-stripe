@@ -17,8 +17,8 @@
 {% endblock %}
 
 {% block content %}
-	{#{{ form_start(form, {'attr': {'id': 'payment-form'}}) }}#}
-	<form action="" method="POST" id="payment-form">
+	{{ form_start(form, {'attr': {'id': 'payment-form'}}) }}
+	{#<form action="" method="POST" id="payment-form">#}
 
 	{# Form elements not defined in form class as they need to have no name attribute and SF2 does not support this #}
 		<span class="payment-errors"></span>
@@ -47,6 +47,6 @@
 		</div>
 
 		<button type="submit">Submit Payment</button>
-	</form>
-	{#{{ form_end(form) }}#}
+	{#</form>#}
+	{{ form_end(form) }}
 {% endblock %}

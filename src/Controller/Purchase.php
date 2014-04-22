@@ -15,9 +15,14 @@ use Message\Mothership\Commerce\Payable\PayableInterface;
  */
 class Purchase extends Controller implements PurchaseControllerInterface
 {
+	// Session keys for purchase() vars
 	const PAYABLE_KEY = 'stripe.checkout.payable';
 	const STAGES_KEY  = 'stripe.checkout.stages';
 	const OPTIONS_KEY = 'stripe.checkout.options';
+
+	// Post data keys returned by Stripe
+	const STRIPE_CHECKOUT = 'stripe_checkout';
+	const STRIPE_TOKEN    = 'stripeToken';
 
 	public function purchase(PayableInterface $payable, array $stages, array $options = null)
 	{
@@ -30,12 +35,25 @@ class Purchase extends Controller implements PurchaseControllerInterface
 
 	public function cardDetails()
 	{
-		list($payable, $stages, $options) = $this->_getSessionVars();
-
 		return $this->render('Message:Mothership:Stripe::card_details', [
 			'form' => $this->createForm($this->get('stripe.checkout.form')),
 			'publishableKey' => $this->get('gateway.adapter.stripe')->getPublishableKey(),
 		]);
+	}
+
+	public function purchaseAction()
+	{
+		try {
+			$this->get('gateway.adapter.stripe');
+			list($payable, $stages, $options) = $this->_getSessionVars();
+			$charge = $this->get('stripe.charger')->makePayment($payable, $this->_getToken());
+			de($charge);
+		}
+		catch (\Stripe_CardError $e) {
+			$this->addFlash('error', $e->getMessage());
+
+			return $this->redirectToReferer();
+		}
 	}
 
 	protected function _getSessionVars()
@@ -45,5 +63,10 @@ class Purchase extends Controller implements PurchaseControllerInterface
 			$this->get('http.session')->get(self::STAGES_KEY),
 			$this->get('http.session')->get(self::OPTIONS_KEY),
 		];
+	}
+
+	protected function _getToken()
+	{
+		return $this->get('request')->get(self::STRIPE_TOKEN);
 	}
 }

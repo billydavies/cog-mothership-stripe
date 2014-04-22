@@ -32,5 +32,9 @@ class Services implements ServicesInterface
 		$services['stripe.checkout.form'] = $services->factory(function ($c) {
 			return new \Message\Mothership\Stripe\Form\Checkout;
 		});
+
+		$services['stripe.charger'] = function ($c) {
+			return new \Message\Mothership\Stripe\Charge\Charge;
+		};
 	}
 }
