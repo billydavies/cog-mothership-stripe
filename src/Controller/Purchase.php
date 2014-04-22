@@ -17,7 +17,7 @@ class Purchase extends Controller implements PurchaseControllerInterface
 {
 	public function purchase(PayableInterface $payable, array $stages, array $options = null)
 	{
-		$form = $this->get('stripe.checkout.form');
+		$form = $this->createForm($this->get('stripe.checkout.form'));
 
 		return $this->render('Message:Mothership:Stripe::checkout', [
 			'form'           => $form,

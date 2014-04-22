@@ -1,6 +1,6 @@
 <?php
 
-namespace Message\Mothership\Sripe\Bootstrap;
+namespace Message\Mothership\Stripe\Bootstrap;
 
 use Message\Cog\Bootstrap\ServicesInterface;
 use Message\Mothership\Stripe;
@@ -17,7 +17,7 @@ class Services implements ServicesInterface
 			);
 		};
 
-		$services->extends('gateway.collection', function($collection, $c) {
+		$services->extend('gateway.collection', function($collection, $c) {
 			$collection->add($c['gateway.adapter.stripe']);
 
 			return $collection;
@@ -29,7 +29,7 @@ class Services implements ServicesInterface
 			return $methods;
 		});
 
-		$services['stripe.checkout.forn'] = $services->factory(function ($c) {
+		$services['stripe.checkout.form'] = $services->factory(function ($c) {
 			return new \Message\Mothership\Stripe\Form\Checkout;
 		});
 	}

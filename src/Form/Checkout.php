@@ -9,7 +9,7 @@ class Checkout extends Form\AbstractType
 {
 	public function buildForm(Form\FormBuilderInterface $builder, array $options)
 	{
-		$builder->add(null, 'text', [
+		$builder->add('number', 'text', [
 			'attr' => [
 				'data-stripe' => 'number',
 			],
@@ -21,24 +21,24 @@ class Checkout extends Form\AbstractType
 			'attr' => [
 				'data-stripe' => 'cvc',
 			],
-			new Constraints\Length([
-				'min' => 3,
-				'max' => 3,
-			])
+			'constraints' => [
+				new Constraints\Length([
+					'min' => 3,
+					'max' => 3,
+				]),
+			],
 		]);
 		$builder->add('exp-month', 'date', [
 			'attr' => [
 				'data-stripe' => 'exp-month',
 			],
 			'widget' => 'choice',
-			'format' => 'MM',
 		]);
 		$builder->add('exp-year', 'date', [
 			'attr' => [
 				'data-stripe' => 'exp-year',
 			],
 			'widget' => 'choice',
-			'format' => 'yyyy',
 			'years'  => $this->_getYearRange(),
 		]);
 	}
