@@ -66,10 +66,9 @@ class Purchase extends Controller implements PurchaseControllerInterface
 		]);
 
 		$content = $response->getContent();
-		$data = json_decode($content);
-		$url = $data->url;
+		$data    = json_decode($content);
 
-		return $this->redirect($url);
+		return $this->redirect($data->url);
 	}
 
 	protected function _getResponseUrl(Response $response)

@@ -78,7 +78,7 @@ class Gateway implements GatewayInterface
 	 */
 	public function getRefundControllerReference()
 	{
-		return 'Message:Mothership:Stripe::ControllerRefund#refund';
+		return 'Message:Mothership:Stripe::Controller:Refund#refund';
 	}
 
 	public function getPublishableKey()
@@ -88,16 +88,9 @@ class Gateway implements GatewayInterface
 
 	public function purchase(PayableInterface $payable)
 	{
-		$charge = $this->_getChargeObject($payable);
-
-		return $charge;
-	}
-
-	protected function _getChargeObject(PayableInterface $payable)
-	{
 		$total = (in_array($payable->getPayableCurrency(), $this->_zeroDecimalCurrencies)) ?
-			(int) $payable->getPayableTotal() :
-			(int) $payable->getPayableTotal() * 100;
+			(int) $payable->getPayableAmount() :
+			(int) $payable->getPayableAmount() * 100;
 
 		$charge = \Stripe_Charge::create([
 			'amount'   => $total,
@@ -106,6 +99,13 @@ class Gateway implements GatewayInterface
 		]);
 
 		return $charge;
+	}
+
+	public function refund($reference)
+	{
+		$charge = \Stripe_Charge::retrieve($reference);
+
+		return $charge->refund();
 	}
 
 	protected function _setPublishableKey($publishableKey)
