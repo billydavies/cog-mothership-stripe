@@ -56,7 +56,7 @@ class Purchase extends Controller implements PurchaseControllerInterface
 			$this->addFlash('error', $e->getMessage());
 
 			$response = $this->forward($stages['failure'], ['payable' => $payable]);
-			return $this->redirect($response);
+			return $this->redirect($response->getTargetUrl());
 		}
 
 		$response = $this->forward($stages['success'], [
