@@ -5,6 +5,7 @@ namespace Message\Mothership\Stripe\Controller;
 use Message\Cog\Controller\Controller;
 use Message\Mothership\Ecommerce\Controller\Gateway\PurchaseControllerInterface;
 use Message\Mothership\Commerce\Payable\PayableInterface;
+use Message\Cog\HTTP\Response;
 
 /**
  * Controller for purchases using the Stripe server gateway integration.
@@ -47,22 +48,35 @@ class Purchase extends Controller implements PurchaseControllerInterface
 	public function purchaseAction()
 	{
 		list($payable, $stages, $options) = $this->_getSessionVars();
-		$this->get('gateway.adapter.stripe');
 
 		try {
 			$charge = $this->get('gateway.adapter.stripe')->purchase($payable);
-
-			return $this->forward($stages['success'], [
-				'payable'   => $payable,
-				'reference' => $charge->id,
-				'method'    => $this->get('order.payment.methods')->get('stripe'),
-			]);
 		}
 		catch (\Stripe_CardError $e) {
 			$this->addFlash('error', $e->getMessage());
 
-			return $this->forward($stages['failure'], ['payable' => $payable]);
+			$response = $this->forward($stages['failure'], ['payable' => $payable]);
+			return $this->redirect($response);
 		}
+
+		$response = $this->forward($stages['success'], [
+			'payable'   => $payable,
+			'reference' => $charge->id,
+			'method'    => $this->get('order.payment.methods')->get('stripe'),
+		]);
+
+		$content = $response->getContent();
+		$data = json_decode($content);
+		$url = $data->url;
+
+		return $this->redirect($url);
+	}
+
+	protected function _getResponseUrl(Response $response)
+	{
+		$response = json_decode($response->getContent());
+
+		return $response->url;
 	}
 
 	protected function _getSessionVars()

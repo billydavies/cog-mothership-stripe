@@ -793,12 +793,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:messagedigital/cog-mothership-ecommerce.git",
-                "reference": "8d214dc6ccbfd9b89ce04c1273caec4e483c6237"
+                "reference": "afe77b33ca678cb4c5351189e7c6006f5e0f7c82"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/messagedigital/cog-mothership-ecommerce/zipball/8d214dc6ccbfd9b89ce04c1273caec4e483c6237",
-                "reference": "8d214dc6ccbfd9b89ce04c1273caec4e483c6237",
+                "url": "https://api.github.com/repos/messagedigital/cog-mothership-ecommerce/zipball/afe77b33ca678cb4c5351189e7c6006f5e0f7c82",
+                "reference": "afe77b33ca678cb4c5351189e7c6006f5e0f7c82",
                 "shasum": ""
             },
             "require": {
@@ -847,7 +847,7 @@
                 "issues": "http://github.com/messagedigital/cog-mothership-ecommerce/issues",
                 "source": "https://github.com/messagedigital/cog-mothership-ecommerce/tree/feature/payment-refactor"
             },
-            "time": "2014-04-22 11:59:06"
+            "time": "2014-04-22 14:50:44"
         },
         {
             "name": "message/cog-mothership-file-manager",
