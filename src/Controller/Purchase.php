@@ -20,10 +20,6 @@ class Purchase extends Controller implements PurchaseControllerInterface
 	const STAGES_KEY  = 'stripe.checkout.stages';
 	const OPTIONS_KEY = 'stripe.checkout.options';
 
-	// Post data keys returned by Stripe
-	const STRIPE_CHECKOUT = 'stripe_checkout';
-	const STRIPE_TOKEN    = 'stripeToken';
-
 	public function purchase(PayableInterface $payable, array $stages, array $options = null)
 	{
 		$this->get('http.session')->set(self::PAYABLE_KEY, $payable);
@@ -53,8 +49,7 @@ class Purchase extends Controller implements PurchaseControllerInterface
 		list($payable, $stages, $options) = $this->_getSessionVars();
 		$this->get('gateway.adapter.stripe');
 		try {
-			$charge = $this->get('stripe.charger')->makePayment($payable, $this->_getToken());
-			de($charge);
+			$this->get('gateway.adapter.stripe')->purchase($payable);
 		}
 		catch (\Stripe_CardError $e) {
 			$this->addFlash('error', $e->getMessage());
@@ -70,10 +65,5 @@ class Purchase extends Controller implements PurchaseControllerInterface
 			$this->get('http.session')->get(self::STAGES_KEY),
 			$this->get('http.session')->get(self::OPTIONS_KEY),
 		];
-	}
-
-	protected function _getToken()
-	{
-		return $this->get('request')->get(self::STRIPE_TOKEN);
 	}
 }

@@ -12,6 +12,7 @@ class Services implements ServicesInterface
 	{
 		$services['gateway.adapter.stripe'] = function($c) {
 			return new Stripe\Gateway(
+				$c['request'],
 				$c['cfg']->stripe->secretKey,
 				$c['cfg']->stripe->publishableKey
 			);
@@ -32,9 +33,5 @@ class Services implements ServicesInterface
 		$services['stripe.checkout.form'] = $services->factory(function ($c) {
 			return new \Message\Mothership\Stripe\Form\Checkout;
 		});
-
-		$services['stripe.charger'] = function ($c) {
-			return new \Message\Mothership\Stripe\Charge\Charge;
-		};
 	}
 }
