@@ -48,8 +48,15 @@ class Purchase extends Controller implements PurchaseControllerInterface
 	{
 		list($payable, $stages, $options) = $this->_getSessionVars();
 		$this->get('gateway.adapter.stripe');
+
 		try {
-			$this->get('gateway.adapter.stripe')->purchase($payable);
+			$charge = $this->get('gateway.adapter.stripe')->purchase($payable);
+
+			return $this->forward($stages['success'], [
+				'payable'   => $payable,
+				'reference' => $charge->id,
+				'method'    => $this->get('order.payment.methods')->get('stripe'),
+			]);
 		}
 		catch (\Stripe_CardError $e) {
 			$this->addFlash('error', $e->getMessage());

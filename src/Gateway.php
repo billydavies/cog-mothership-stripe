@@ -89,7 +89,8 @@ class Gateway implements GatewayInterface
 	public function purchase(PayableInterface $payable)
 	{
 		$charge = $this->_getChargeObject($payable);
-		de($charge);
+
+		return $charge;
 	}
 
 	protected function _getChargeObject(PayableInterface $payable)
