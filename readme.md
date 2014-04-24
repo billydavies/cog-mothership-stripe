@@ -14,6 +14,12 @@ Any attempts to use real cards while in test mode will result in a validation er
 The `secret-key` is a server-side id key for Stripe, and will never be seen by the customer.
 The `publishable-key` is a client-side id key for Stripe, which appears in the JavaScript used to connect to Stripe.
 
+To set Stripe as your active gateway, update the service container with:
+
+    $services['gateway'] = function($c) {
+        return $c['gateway.collection']->get('stripe');
+    };
+
 ## API Process
 The Stripe gateway never leaves Mothership, and instead uses JavaScript and PHP classes to connect to the API without a redirect being necessary. The process looks like this:
 
