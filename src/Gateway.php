@@ -2,6 +2,7 @@
 
 namespace Message\Mothership\Stripe;
 
+use Message\Mothership\Stripe\Charge\Wrapper as Charge;
 use Message\Cog\HTTP\Request;
 use Message\Mothership\Ecommerce\Gateway\GatewayInterface;
 use Message\Mothership\Commerce\Payable\PayableInterface;
@@ -23,6 +24,11 @@ class Gateway implements GatewayInterface
 	 * @var \Message\Cog\HTTP\Request
 	 */
 	protected $_request;
+
+	/**
+	 * @var \Message\Mothership\Stripe\Charge\Wrapper
+	 */
+	protected $_charge;
 
 	protected $_publishableKey;
 	protected $_secretKey;
@@ -50,9 +56,11 @@ class Gateway implements GatewayInterface
 		'XPF',
 	];
 
-	public function __construct(Request $request, $secretKey, $publishableKey)
+	public function __construct(Request $request, Charge $chargeWrapper, $secretKey, $publishableKey)
 	{
 		$this->_request = $request;
+		$this->_charge  = $chargeWrapper;
+
 		$this->_setSecretKey($secretKey);
 		$this->_setPublishableKey($publishableKey);
 	}
@@ -92,20 +100,28 @@ class Gateway implements GatewayInterface
 			(int) $payable->getPayableAmount() :
 			(int) $payable->getPayableAmount() * 100;
 
-		$charge = \Stripe_Charge::create([
-			'amount'   => $total,
-			'currency' => $payable->getPayableCurrency(),
-			'card'     => $this->_getToken(),
-		]);
-
-		return $charge;
+		return $this->_getCharge()->create(
+			$total,
+			$payable->getPayableCurrency(),
+			$this->_getToken()
+		);
 	}
 
 	public function refund($reference)
 	{
-		$charge = \Stripe_Charge::retrieve($reference);
+		return $this->_getCharge()->refund($reference);
+	}
 
-		return $charge->refund();
+	protected function _getCharge()
+	{
+		if (!$this->_charge instanceof Charge) {
+			throw new \LogicException(
+				'$_charge property must be instance of \\Message\\Mothership\\Stripe\\Charge\\Wrapper, ' .
+				gettype($this->_charge) . ' given'
+			);
+		}
+
+		return $this->_charge;
 	}
 
 	protected function _setPublishableKey($publishableKey)
