@@ -2,7 +2,6 @@
 
 	{# Form elements not defined in form class as they need to have no name attribute and SF2 does not support this #}
 	<span class="payment-errors"></span>
-
 	<div class="form-row">
 		<label>Card Number</label>
 		<input type="text" size="20" data-stripe="number" class="card-number"/>
@@ -27,5 +26,7 @@
 		<input type="text" size="4" data-stripe="exp-year" class="card-expiry-year" placeholder="YYYY"/>
 	</div>
 
-	<button type="submit">Pay</button>
+	<div class="form-row total">
+		Total: {{ payable.payableTotal }} <button type="submit">Pay</button>
+	</div>
 {{ form_end(form) }}
