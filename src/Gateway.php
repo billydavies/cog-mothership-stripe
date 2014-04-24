@@ -131,7 +131,14 @@ class Gateway implements GatewayInterface
 
 	public function refund($reference)
 	{
-		return $this->_charge->refund($reference);
+		try {
+			return $this->_charge->refund($reference);
+		}
+		catch (\Exception $e) {
+			$this->_logger->alert($e);
+
+			throw $e;
+		}
 	}
 
 	protected function _setPublishableKey($publishableKey)

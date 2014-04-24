@@ -155,4 +155,21 @@ class GatewayTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertSame($this->_charge, $charge);
 	}
+
+	/**
+	 * @expectedException \Stripe_Error
+	 */
+	public function testRefundError()
+	{
+		$this->_wrapper
+			->shouldReceive('refund')
+			->once()
+			->andThrow(new \Stripe_Error(''));
+
+		$this->_logger
+			->shouldReceive('alert')
+			->once();
+
+		$this->_gateway->refund('test');
+	}
 }
