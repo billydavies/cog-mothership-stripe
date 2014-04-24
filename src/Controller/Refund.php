@@ -6,6 +6,11 @@ use Message\Cog\Controller\Controller;
 use Message\Mothership\Commerce\Payable\PayableInterface;
 use Message\Mothership\Ecommerce\Controller\Gateway\RefundControllerInterface;
 
+/**
+ * Class Refund
+ * @package Message\Mothership\Stripe\Controller
+ * @author Thomas Marchant <thomas@message.co.uk>
+ */
 class Refund extends Controller implements RefundControllerInterface
 {
 	public function refund(PayableInterface $payable, $reference, array $stages, array $options = null)

@@ -6,6 +6,11 @@ use Message\Cog\Bootstrap\ServicesInterface;
 use Message\Mothership\Stripe;
 use Message\Mothership\Ecommerce\Gateway\Validation;
 
+/**
+ * Class Services
+ * @package Message\Mothership\Stripe\Bootstrap
+ * @author Thomas Marchant <thomas@message.co.uk>
+ */
 class Services implements ServicesInterface
 {
 	public function registerServices($services)

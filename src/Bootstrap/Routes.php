@@ -4,6 +4,11 @@ namespace Message\Mothership\Stripe\Bootstrap;
 
 use Message\Cog\Bootstrap\RoutesInterface;
 
+/**
+ * Class Routes
+ * @package Message\Mothership\Stripe\Bootstrap
+ * @author Thomas Marchant <thomas@message.co.uk>
+ */
 class Routes implements RoutesInterface
 {
 	public function registerRoutes($router)
