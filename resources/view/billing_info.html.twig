@@ -1,0 +1,23 @@
+<h1>Secure Payment</h1>
+
+<section class="billing-info">
+	<h3>Billing Information</h3>
+	<div class="adr">
+		<span class="n">{{ address.name }}</span>
+		<div class="address">
+			{% for line in address.lines %}
+				<p>{{ line }}</p>
+			{% endfor %}
+			<p>{{ address.town }}</p>
+		</div>
+		<span class="locality">{{ address.town }}</span>
+		{% if billing.state|length %}
+			<span class="region">{{ address.state }}</span>
+		{% endif %}
+		<span class="postal-code">{{ address.postcode }}</span>
+		<div class="country-name">{{ address.country }}</div>
+	</div>
+
+	<div class="total">Total: {{ payable.payableTotal }}</div>
+
+</section>

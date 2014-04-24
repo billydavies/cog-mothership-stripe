@@ -40,6 +40,7 @@ class Purchase extends Controller implements PurchaseControllerInterface
 
 		return $this->render('Message:Mothership:Stripe::card_details', [
 			'form'           => $this->createForm($this->get('stripe.checkout.form')),
+			'payable'        => $payable,
 			'address'        => $payable->getPayableAddress('billing'),
 			'publishableKey' => $this->get('gateway.adapter.stripe')->getPublishableKey(),
 		]);

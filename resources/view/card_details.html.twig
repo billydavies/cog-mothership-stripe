@@ -1,75 +1,10 @@
 {% extends 'Message:Mothership:Ecommerce::checkout:checkout-layout' %}
 
 {% block javascripts %}
-	{{ parent() }}
-	{% javascripts
-		'@Message:Mothership:Stripe::resources:assets:js:stripeResponse.js'
-		output='/assets/js/stripe.js'
-		filter='?jsmin'
-	%}
-		<script src="{{ asset_url }}"></script>
-		<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-		<script type="text/javascript">
-			jQuery(function($) {
-				$('#payment-form').submit(function(event) {
-					var $form = $(this);
-
-					// Disable the submit button to prevent repeated clicks
-					$form.find('button').prop('disabled', true);
-
-					Stripe.card.createToken({
-						number: $('.card-number').val(),
-						cvc: $('.card-cvc').val(),
-						exp_month: $('.card-expiry-month').val(),
-						exp_year: $('.card-expiry-year').val(),
-						address_line1: '{{ address.lines[1] }}',
-						address_line2: '{{ address.lines[2] }}',
-						address_city: '{{ address.town }}',
-						address_state: '{{ address.state }}',
-						address_zip: '{{ address.state }}',
-						address_country: '{{ address.countryID }}'
-					}, stripeResponseHandler);
-					// Prevent the form from submitting with the default action
-					return false;
-				});
-			});
-
-			Stripe.setPublishableKey('{{ publishableKey }}');
-		</script>
-	{% endjavascripts %}
+	{% include 'Message:Mothership:Stripe::javascript' with { 'parent': parent() } %}
 {% endblock %}
 
 {% block content %}
-	{{ form_start(form, {'attr': {'id': 'payment-form'}}) }}
-	{#<form action="" method="POST" id="payment-form">#}
-
-	{# Form elements not defined in form class as they need to have no name attribute and SF2 does not support this #}
-		<span class="payment-errors"></span>
-
-		<div class="form-row">
-			<label>
-				<span>Card Number</span>
-				<input type="text" size="20" data-stripe="number" class="card-number"/>
-			</label>
-		</div>
-
-		<div class="form-row">
-			<label>
-				<span>CVC</span>
-				<input type="text" size="4" data-stripe="cvc" class="card-cvc"/>
-			</label>
-		</div>
-
-		<div class="form-row">
-			<label>
-				<span>Expiration (MM/YYYY)</span>
-				<input type="text" size="2" data-stripe="exp-month" class="card-expiry-month"/>
-			</label>
-			<span> / </span>
-			<input type="text" size="4" data-stripe="exp-year" class="card-expiry-year"/>
-		</div>
-
-		<button type="submit">Submit Payment</button>
-	{#</form>#}
-	{{ form_end(form) }}
+	{% include 'Message:Mothership:Stripe::billing_info' %}
+	{% include 'Message:Mothership:Stripe::form' %}
 {% endblock %}

@@ -1,0 +1,41 @@
+{% block javascripts %}
+	{{ parent }}
+	{% javascripts
+		'@Message:Mothership:Stripe::resources:assets:js:stripeResponse.js'
+		'@Message:Mothership:Stripe::resources:assets:js:toggleHelp.js'
+
+		output='/assets/js/stripe.js'
+		filter='?jsmin'
+	%}
+
+	<script src="{{ asset_url }}"></script>
+	<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+	<script type="text/javascript">
+		jQuery(function($) {
+			$('#payment-formpoo').submit(function(event) {
+				var $form = $(this);
+
+				// Disable the submit button to prevent repeated clicks
+				$form.find('button').prop('disabled', true);
+
+				Stripe.card.createToken({
+					number: $('.card-number').val(),
+					cvc: $('.card-cvc').val(),
+					exp_month: $('.card-expiry-month').val(),
+					exp_year: $('.card-expiry-year').val(),
+					address_line1: '{{ address.lines[1] }}',
+					address_line2: '{{ address.lines[2] }}',
+					address_city: '{{ address.town }}',
+					address_state: '{{ address.state }}',
+					address_zip: '{{ address.state }}',
+					address_country: '{{ address.countryID }}'
+				}, stripeResponseHandler);
+				// Prevent the form from submitting with the default action
+				return false;
+			});
+		});
+
+		Stripe.setPublishableKey('{{ publishableKey }}');
+	</script>
+	{% endjavascripts %}
+{% endblock %}

@@ -1,0 +1,31 @@
+{{ form_start(form, {'attr': {'id': 'payment-form' }}) }}
+
+	{# Form elements not defined in form class as they need to have no name attribute and SF2 does not support this #}
+	<span class="payment-errors"></span>
+
+	<div class="form-row">
+		<label>Card Number</label>
+		<input type="text" size="20" data-stripe="number" class="card-number"/>
+	</div>
+
+	<div class="form-row">
+		<label>CVC
+			<div class="help">
+				<span>Info</span>
+
+				<p>The card security code is located on the back of credit or debit cards and is typically a separate group
+					of 3 digits to the right of the signature strip.</p>
+			</div>
+		</label>
+		<input type="text" size="4" data-stripe="cvc" class="card-cvc"/>
+	</div>
+
+	<div class="form-row">
+		<label>Expiration <span>(MM/YYYY)</span></label>
+		<input type="text" size="2" data-stripe="exp-month" class="card-expiry-month" placeholder="MM"/>
+		<span> / </span>
+		<input type="text" size="4" data-stripe="exp-year" class="card-expiry-year" placeholder="YYYY"/>
+	</div>
+
+	<button type="submit">Pay</button>
+{{ form_end(form) }}
