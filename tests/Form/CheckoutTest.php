@@ -1,7 +1,25 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: thomas
- * Date: 24/04/2014
- * Time: 10:56
- */
+
+namespace Message\Mothership\Stripe\Test\Stripe\Form;
+
+use Message\Mothership\Stripe\Form\Checkout;
+
+class CheckoutTest extends \PHPUnit_Framework_TestCase
+{
+	protected $_form;
+
+	const NAME = 'stripe_checkout';
+
+	public function setUp()
+	{
+		$this->_form = new Checkout;
+	}
+
+	public function testGetName()
+	{
+		$this->assertSame(
+			self::NAME,
+			$this->_form->getName()
+		);
+	}
+}
