@@ -19,6 +19,7 @@ class Services implements ServicesInterface
 			return new Stripe\Gateway(
 				$c['request'],
 				$c['stripe.charge.wrapper'],
+				$c['log.payments'],
 				$c['cfg']->stripe->secretKey,
 				$c['cfg']->stripe->publishableKey
 			);

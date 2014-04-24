@@ -14,8 +14,9 @@ class GatewayTest extends \PHPUnit_Framework_TestCase
 	protected $_gateway;
 
 	protected $_payable;
-	protected $_charge;
 	protected $_wrapper;
+	protected $_logger;
+	protected $_charge;
 
 	const NAME = 'stripe';
 
@@ -28,17 +29,18 @@ class GatewayTest extends \PHPUnit_Framework_TestCase
 
 	public function setUp()
 	{
-		$this->_request = \Mockery::mock('\\Message\\Cog\\HTTP\\Request');
 		$this->_payable = \Mockery::mock('\\Message\\Mothership\\Commerce\\Payable\\PayableInterface');
+		$this->_request = \Mockery::mock('\\Message\\Cog\\HTTP\\Request');
 		$this->_wrapper = \Mockery::mock('\\Message\\Mothership\\Stripe\\Charge\\Wrapper');
-		$this->_charge  = \Mockery::mock('\Stripe_Charge');
-		$this->_gateway = \Mockery::mock('\Message\Mothership\Stripe\Gateway[]',
-			[
+		$this->_logger  = \Mockery::mock('\\Monolog\\Logger');
+		$this->_charge  = \Mockery::mock('\\Stripe_Charge');
+
+		$this->_gateway = new \Message\Mothership\Stripe\Gateway(
 				$this->_request,
 				$this->_wrapper,
+				$this->_logger,
 				self::SKEY,
-				self::PKEY,
-			]
+				self::PKEY
 		);
 	}
 
@@ -101,9 +103,45 @@ class GatewayTest extends \PHPUnit_Framework_TestCase
 			->once()
 			->andReturn($this->_charge);
 
+		$this->_logger
+			->shouldReceive('alert')
+			->never();
+
 		$charge = $this->_gateway->purchase($this->_payable);
 
 		$this->assertSame($this->_charge, $charge);
+	}
+
+	/**
+	 * @expectedException \Stripe_Error
+	 */
+	public function testPurchaseError()
+	{
+		$this->_payable
+			->shouldReceive('getPayableCurrency')
+			->twice()
+			->andReturn('GBP');
+
+		$this->_payable
+			->shouldReceive('getPayableAmount')
+			->once()
+			->andReturn(100);
+
+		$this->_request
+			->shouldReceive('get')
+			->once()
+			->andReturn(self::TOKEN);
+
+		$this->_wrapper
+			->shouldReceive('create')
+			->once()
+			->andThrow(new \Stripe_Error(''));
+
+		$this->_logger
+			->shouldReceive('alert')
+			->once();
+
+		$this->_gateway->purchase($this->_payable);
 	}
 
 	public function testRefund()

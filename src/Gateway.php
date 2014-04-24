@@ -2,6 +2,7 @@
 
 namespace Message\Mothership\Stripe;
 
+use Monolog\Logger;
 use Message\Mothership\Stripe\Charge\Wrapper as Charge;
 use Message\Cog\HTTP\Request;
 use Message\Mothership\Ecommerce\Gateway\GatewayInterface;
@@ -30,6 +31,11 @@ class Gateway implements GatewayInterface
 	 */
 	protected $_charge;
 
+	/**
+	 * @var \Monolog\Logger
+	 */
+	protected $_logger;
+
 	protected $_publishableKey;
 	protected $_secretKey;
 
@@ -56,10 +62,17 @@ class Gateway implements GatewayInterface
 		'XPF',
 	];
 
-	public function __construct(Request $request, Charge $chargeWrapper, $secretKey, $publishableKey)
+	public function __construct(
+		Request $request,
+		Charge $chargeWrapper,
+		Logger $logger,
+		$secretKey,
+		$publishableKey
+	)
 	{
 		$this->_request = $request;
 		$this->_charge  = $chargeWrapper;
+		$this->_logger  = $logger;
 
 		$this->_setSecretKey($secretKey);
 		$this->_setPublishableKey($publishableKey);
@@ -96,32 +109,29 @@ class Gateway implements GatewayInterface
 
 	public function purchase(PayableInterface $payable)
 	{
-		$total = (in_array($payable->getPayableCurrency(), $this->_zeroDecimalCurrencies)) ?
-			(int) $payable->getPayableAmount() :
-			(int) $payable->getPayableAmount() * 100;
+		try {
+			$total = (in_array($payable->getPayableCurrency(), $this->_zeroDecimalCurrencies)) ?
+				(int) $payable->getPayableAmount() :
+				(int) $payable->getPayableAmount() * 100;
 
-		return $this->_getCharge()->create(
-			$total,
-			$payable->getPayableCurrency(),
-			$this->_getToken()
-		);
+			$charge = $this->_charge->create(
+				$total,
+				$payable->getPayableCurrency(),
+				$this->_getToken()
+			);
+
+			return $charge;
+		}
+		catch (\Exception $e) {
+			$this->_logger->alert($e);
+
+			throw $e;
+		}
 	}
 
 	public function refund($reference)
 	{
-		return $this->_getCharge()->refund($reference);
-	}
-
-	protected function _getCharge()
-	{
-		if (!$this->_charge instanceof Charge) {
-			throw new \LogicException(
-				'$_charge property must be instance of \\Message\\Mothership\\Stripe\\Charge\\Wrapper, ' .
-				gettype($this->_charge) . ' given'
-			);
-		}
-
-		return $this->_charge;
+		return $this->_charge->refund($reference);
 	}
 
 	protected function _setPublishableKey($publishableKey)
