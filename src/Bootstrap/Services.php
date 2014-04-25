@@ -52,7 +52,7 @@ class Services implements ServicesInterface
 		});
 
 		$services['stripe.charge.wrapper'] = function($c) {
-			return new \Message\Mothership\Stripe\Charge\Wrapper;
+			return new \Message\Mothership\Stripe\Charge\Wrapper($c['user.current']);
 		};
 	}
 }
