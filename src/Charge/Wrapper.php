@@ -17,8 +17,12 @@ class Wrapper
 		]);
 	}
 
-	public function refund($reference)
+	public function refund($reference, $amount)
 	{
-		return \Stripe_Charge::retrieve($reference)->refund();
+		$amount = (int) $amount;
+
+		return \Stripe_Charge::retrieve($reference)->refund([
+			'amount' => $amount
+		]);
 	}
 }

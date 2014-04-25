@@ -144,7 +144,7 @@ class GatewayTest extends \PHPUnit_Framework_TestCase
 		$this->_gateway->purchase($this->_payable);
 	}
 
-	public function testGetAmountToChargeStandardCurrency()
+	public function testGetAmountBySmallestCurrencyUnitStandardCurrency()
 	{
 		$pounds = 100;
 		$pence  = $pounds * 100;
@@ -161,11 +161,11 @@ class GatewayTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertSame(
 			$pence,
-			$this->_gateway->getAmountToCharge($this->_payable)
+			$this->_gateway->getAmountBySmallestCurrencyUnit($this->_payable)
 		);
 	}
 
-	public function testGetAmountToChargeZeroDecimalCurrency()
+	public function testGetAmountBySmallestCurrencyUnitZeroDecimalCurrency()
 	{
 		$yen = 100;
 
@@ -181,7 +181,7 @@ class GatewayTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertSame(
 			$yen,
-			$this->_gateway->getAmountToCharge($this->_payable)
+			$this->_gateway->getAmountBySmallestCurrencyUnit($this->_payable)
 		);
 	}
 
@@ -192,7 +192,12 @@ class GatewayTest extends \PHPUnit_Framework_TestCase
 			->once()
 			->andReturn($this->_charge);
 
-		$charge = $this->_gateway->refund('test');
+		$this->_payable
+			->shouldReceive('getPayableAmount')
+			->once()
+			->andReturn(100);
+
+		$charge = $this->_gateway->refund($this->_payable, 'test');
 
 		$this->assertSame($this->_charge, $charge);
 	}
@@ -207,10 +212,15 @@ class GatewayTest extends \PHPUnit_Framework_TestCase
 			->once()
 			->andThrow(new \Stripe_Error(''));
 
+		$this->_payable
+			->shouldReceive('getPayableAmount')
+			->once()
+			->andReturn(100);
+
 		$this->_logger
 			->shouldReceive('alert')
 			->once();
 
-		$this->_gateway->refund('test');
+		$this->_gateway->refund($this->_payable, 'test');
 	}
 }

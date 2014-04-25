@@ -110,7 +110,7 @@ class Gateway implements GatewayInterface
 	public function purchase(PayableInterface $payable)
 	{
 		try {
-			$total = $this->getAmountToCharge($payable);
+			$total = $this->getAmountBySmallestCurrencyUnit($payable);
 
 			$charge = $this->_charge->create(
 				$total,
@@ -127,10 +127,12 @@ class Gateway implements GatewayInterface
 		}
 	}
 
-	public function refund($reference)
+	public function refund(PayableInterface $payable, $reference)
 	{
 		try {
-			return $this->_charge->refund($reference);
+			$amount = $this->getAmountBySmallestCurrencyUnit($payable);
+
+			return $this->_charge->refund($reference, $amount);
 		}
 		catch (\Exception $e) {
 			$this->_logger->alert($e);
@@ -139,7 +141,8 @@ class Gateway implements GatewayInterface
 		}
 	}
 
-	public function getAmountToCharge(PayableInterface $payable)
+	// best method name EVAR
+	public function getAmountBySmallestCurrencyUnit(PayableInterface $payable)
 	{
 		return (in_array($payable->getPayableCurrency(), $this->_zeroDecimalCurrencies)) ?
 			(int) $payable->getPayableAmount() :

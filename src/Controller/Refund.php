@@ -16,7 +16,7 @@ class Refund extends Controller implements RefundControllerInterface
 	public function refund(PayableInterface $payable, $reference, array $stages, array $options = null)
 	{
 		try {
-			$charge = $this->get('gateway.adapter.stripe')->refund($reference);
+			$charge = $this->get('gateway.adapter.stripe')->refund($payable, $reference);
 		}
 		catch (\Stripe_CardError $e) {
 			$this->addFlash('error', $e->getMessage());
