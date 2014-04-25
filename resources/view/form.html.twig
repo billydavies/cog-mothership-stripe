@@ -7,23 +7,23 @@
 		<input type="text" size="20" data-stripe="number" class="card-number"/>
 	</div>
 
-	<div class="form-row">
-		<label>CVC
-			<div class="help">
+	<div class="form-row cvc">
+		<div class="help">
 				<span>Info</span>
 
 				<p>The card security code is located on the back of credit or debit cards and is typically a separate group
 					of 3 digits to the right of the signature strip.</p>
 			</div>
-		</label>
+		<label>CVC</label>
 		<input type="text" size="4" data-stripe="cvc" class="card-cvc"/>
 	</div>
 
 	<div class="form-row">
-		<label>Expiration <span>(MM/YYYY)</span></label>
+		<label>Expiration</label>
 		<input type="text" size="2" data-stripe="exp-month" class="card-expiry-month" placeholder="MM"/>
 		<span> / </span>
 		<input type="text" size="4" data-stripe="exp-year" class="card-expiry-year" placeholder="YYYY"/>
+		<span>(MM/YYYY)</span>
 	</div>
 
 	<div class="security-info"><p>Security information. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tincidunt elementum diam et feugiat.</p></div>
