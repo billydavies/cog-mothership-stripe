@@ -26,6 +26,8 @@
 		<input type="text" size="4" data-stripe="exp-year" class="card-expiry-year" placeholder="YYYY"/>
 	</div>
 
+	<div class="security-info"><p>Security information. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tincidunt elementum diam et feugiat.</p></div>
+
 	<div class="form-row total">
 		Total: {{ payable.payableTotal | price(payable.payableCurrency) }} <button type="submit">Pay</button>
 	</div>

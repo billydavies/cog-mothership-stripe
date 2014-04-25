@@ -155,10 +155,9 @@
 }
 
 .security-info {
-	color: #52903e;
 	font: normal 0.85em Georgia, serif;
 	line-height: 100%;
-	margin: 10px 0px 0px 0px;
+	margin: 10px 0px;
 }
 
 .security-info:before {
