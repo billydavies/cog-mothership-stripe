@@ -187,15 +187,20 @@ class GatewayTest extends \PHPUnit_Framework_TestCase
 
 	public function testRefund()
 	{
-		$this->_wrapper
-			->shouldReceive('refund')
+		$this->_payable
+			->shouldReceive('getPayableCurrency')
 			->once()
-			->andReturn($this->_charge);
+			->andReturn('GBP');
 
 		$this->_payable
 			->shouldReceive('getPayableAmount')
 			->once()
 			->andReturn(100);
+
+		$this->_wrapper
+			->shouldReceive('refund')
+			->once()
+			->andReturn($this->_charge);
 
 		$charge = $this->_gateway->refund($this->_payable, 'test');
 
@@ -207,15 +212,20 @@ class GatewayTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testRefundError()
 	{
-		$this->_wrapper
-			->shouldReceive('refund')
+		$this->_payable
+			->shouldReceive('getPayableCurrency')
 			->once()
-			->andThrow(new \Stripe_Error(''));
+			->andReturn('GBP');
 
 		$this->_payable
 			->shouldReceive('getPayableAmount')
 			->once()
 			->andReturn(100);
+
+		$this->_wrapper
+			->shouldReceive('refund')
+			->once()
+			->andThrow(new \Stripe_Error(''));
 
 		$this->_logger
 			->shouldReceive('alert')
