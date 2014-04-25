@@ -124,7 +124,7 @@
 }
 
 .payment .cards {
-	margin: 0px 0px 20px 0px;
+	margin: 0px 0px 0px 0px;
 	overflow: hidden;
 	width: 50%;
 }
@@ -136,7 +136,7 @@
 }
 
 .cards h4 {
-	margin: 0px 10px 0px 0px;
+	margin: 0px 15px 0px 0px;
 	font: bold 1em Georgia, serif;
 }
 
