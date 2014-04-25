@@ -1,0 +1,4 @@
+ms.stripe:
+  error:
+    js: Something went wrong, please ensure that you have JavaScript enabled in your browser. If the problem persists, please contact us.
+    generic: Something went wrong. Please try again, and contact us if the problem persists.

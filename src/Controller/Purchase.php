@@ -56,8 +56,17 @@ class Purchase extends Controller implements PurchaseControllerInterface
 		catch (\Stripe_CardError $e) {
 			$this->addFlash('error', $e->getMessage());
 
-			$response = $this->forward($stages['failure'], ['payable' => $payable]);
-			return $this->redirect($response->getTargetUrl());
+			return $this->_redirectOnFailure($payable, $stages);
+		}
+		catch (\Stripe_InvalidRequestError $e) {
+			$this->addFlash('error', $this->trans('ms.stripe.error.js'));
+
+			return $this->_redirectOnFailure($payable, $stages);
+		}
+		catch (\Exception $e) {
+			$this->addFlash('error', $this->trans('ms.stripe.error.generic'));
+
+			return $this->_redirectOnFailure($payable, $stages);
 		}
 
 		$response = $this->forward($stages['success'], [
@@ -70,6 +79,13 @@ class Purchase extends Controller implements PurchaseControllerInterface
 		$data    = json_decode($content);
 
 		return $this->redirect($data->url);
+	}
+
+	protected function _redirectOnFailure(PayableInterface $payable, $stages)
+	{
+		$response = $this->forward($stages['failure'], ['payable' => $payable]);
+
+		return $this->redirect($response->getTargetUrl());
 	}
 
 	protected function _getResponseUrl(Response $response)
