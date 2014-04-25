@@ -1,5 +1,9 @@
 /* Payment
 ------------------------------------------------------------ */
+.payment {
+	width: 50%;
+	margin: auto;
+}
 
 .payment button {
 	background: #333 url(../images/lock.png) 10px center no-repeat;
@@ -17,9 +21,17 @@
 	opacity: 0.1;
 }
 
+.payment input {
+	padding: 5px;
+	font: bold 1.25em Georgia, serif;
+}
+
 .payment .billing-info {
-	float: right;
-	background: rgba(0,0,0,0.1);
+	margin: 0px 0px 20px 0px;
+	padding: 10px;
+}
+
+.payment .card-info {
 	padding: 10px;
 }
 
@@ -44,7 +56,7 @@
 .payment .form-row label {
 	font: bold 1em Georgia, serif;
 	margin: 0px 10px 0px 0px;
-	width: 200px;
+	width: 130px;
 	display: inline-block;
 }
 
@@ -53,12 +65,17 @@
 }
 
 .payment .card-number {
-	width: 300px;
+	width: 200px;
+}
+
+.payment .form-row.cvc {
+	width: 280px;
 }
 
 .payment .help {
 	position: relative;
 	margin: 0px;
+	float: right;
 }
 
 .payment .help span {
