@@ -2,15 +2,29 @@
 ------------------------------------------------------------ */
 
 .payment button {
-	background: #333;
+	background: #333 url(../images/lock.png) 10px center no-repeat;
 	color: #fefefe;
 	margin: 0px;
-	padding: 10px;
+	padding: 5px 15px 5px 25px;
 	border: none;
+	font: bold 1em Georgia, serif;
+}
+
+.payment button[disabled=disabled],
+.payment button:disabled,
+.payment button[disabled=disabled]:hover,
+.payment button:disabled:hover {
+	opacity: 0.1;
 }
 
 .payment .billing-info {
 	float: right;
+	background: rgba(0,0,0,0.1);
+	padding: 10px;
+}
+
+.payment .billing-info .adr {
+	margin: 10px 0px;
 }
 
 .payment .billing-info h3 {
@@ -21,10 +35,16 @@
 	margin: 0px 0px 10px 0px;
 }
 
+.payment .form-row.total {
+	float: right;
+	clear: both;
+	margin: 20px 0px;
+}
+
 .payment .form-row label {
 	font: bold 1em Georgia, serif;
 	margin: 0px 10px 0px 0px;
-	width: 240px;
+	width: 200px;
 	display: inline-block;
 }
 
@@ -47,8 +67,8 @@
 	overflow: hidden;
 	padding-left: 10px;
 	margin: 0px 0px 0px 5px;
-	width: 25px;
-	height: 30px;
+	width: 19px;
+	height: 19px;
 	background: url(../images/info-icon.png) no-repeat 0 0;
 	text-indent: -999em;
 	content: '?';
@@ -59,13 +79,13 @@
 .payment .help p {
 	position: absolute;
 	left: 30px;
-	top: 0px;
+	top: -5px;
 	z-index: 99;
 	display: none;
 	margin-left: 7px;
 	padding: 10px 10px 10px 10px;
 	width: 270px;
-	background: #999;
+	background: #bababa;
 	font-size: 0.857em;
 }
 
@@ -76,7 +96,7 @@
 	width: 0px;
 	height: 0px;
 	border-top: 7px solid transparent;
-	border-right: 7px solid #999;
+	border-right: 7px solid #bababa;
 	border-bottom: 7px solid transparent;
 	content: '';
 
@@ -89,9 +109,47 @@
 .payment .cards {
 	margin: 0px 0px 20px 0px;
 	overflow: hidden;
+	width: 50%;
+}
+
+.cards h4,
+.cards ul {
+	float: left;
+	font: normal 1em Georgia, serif;
+}
+
+.cards h4 {
+	margin: 0px 10px 0px 0px;
+	font: bold 1em Georgia, serif;
 }
 
 .cards li {
 	float: left;
 	list-style: none;
+	text-indent: -999em;
+	margin: 0px 5px 0px 0px;
+}
+
+.cards .visa {
+	background: url(../images/visa.gif) no-repeat 0 0;
+	width: 39px;
+	height: 25px;
+}
+
+.cards .mastercard {
+	background: url(../images/mastercard.gif) no-repeat 0 0;
+	width: 41px;
+	height: 25px;
+}
+
+.cards .amex {
+	background: url(../images/amex.gif) no-repeat 0 0;
+	width: 25px;
+	height: 25px;
+}
+
+.payment-errors {
+	color: #c90513;
+	display: block;
+	margin: 0px 0px 20px 0px;
 }

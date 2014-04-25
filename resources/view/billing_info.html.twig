@@ -6,7 +6,6 @@
 			{% for line in address.lines %}
 				<p>{{ line }}</p>
 			{% endfor %}
-			<p>{{ address.town }}</p>
 		</div>
 		<span class="locality">{{ address.town }}</span>
 		{% if billing.state|length %}

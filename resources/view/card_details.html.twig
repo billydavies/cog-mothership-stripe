@@ -6,5 +6,12 @@
 
 {% block content %}
 	{% include 'Message:Mothership:Stripe::billing_info' %}
+	<div class="cards"><h4>Cards Accepted</h4>
+		<ul>
+			<li class="visa">Visa</li>
+			<li class="mastercard">Mastercard</li>
+			<li class="amex">American Express</li>
+		</ul>
+	 </div>
 	{% include 'Message:Mothership:Stripe::form' %}
 {% endblock %}
