@@ -24,12 +24,19 @@
 					exp_month: $('.card-expiry-month').val(),
 					exp_year: $('.card-expiry-year').val(),
 					address_line1: '{{ address.lines[1] }}',
-					address_line2: '{{ address.lines[2] }}',
-					address_city: '{{ address.town }}',
-					address_state: '{{ address.state }}',
-					address_zip: '{{ address.state }}',
+					{% if address.lines[2] | length > 0 %}
+						address_line2: '{{ address.lines[2] }}',
+					{% endif %}
+					{% if address.town | length > 0 %}
+						address_city: '{{ address.town }}',
+					{% endif %}
+					{% if address.state | length > 0 %}
+						address_state: '{{ address.state }}',
+					{% endif %}
+					address_zip: '{{ address.postcode }}',
 					address_country: '{{ address.countryID }}'
 				}, stripeResponseHandler);
+
 				// Prevent the form from submitting with the default action
 				return false;
 			});
