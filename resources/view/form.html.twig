@@ -2,9 +2,9 @@
 
 	{# Form elements not defined in form class as they need to have no name attribute and SF2 does not support this #}
 	<span class="payment-errors"></span>
-	<div class="form-row">
+	<div class="form-row required">
 		<label>Card Number</label>
-		<input type="text" size="20" data-stripe="number" class="card-number"/>
+		<input type="text" size="20" data-stripe="number" class="card-number" required="required" />
 	</div>
 
 	<div class="form-row">
@@ -19,11 +19,11 @@
 		<input type="text" size="4" data-stripe="cvc" class="card-cvc"/>
 	</div>
 
-	<div class="form-row">
+	<div class="form-row required">
 		<label>Expiration <span>(MM/YYYY)</span></label>
-		<input type="text" size="2" data-stripe="exp-month" class="card-expiry-month" placeholder="MM"/>
+		<input type="text" size="2" data-stripe="exp-month" class="card-expiry-month" placeholder="MM" required="required" />
 		<span> / </span>
-		<input type="text" size="4" data-stripe="exp-year" class="card-expiry-year" placeholder="YYYY"/>
+		<input type="text" size="4" data-stripe="exp-year" class="card-expiry-year" placeholder="YYYY" required="required" />
 	</div>
 
 	<div class="security-info"><p>Security information. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tincidunt elementum diam et feugiat.</p></div>
