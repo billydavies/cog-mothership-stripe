@@ -110,9 +110,7 @@ class Gateway implements GatewayInterface
 	public function purchase(PayableInterface $payable)
 	{
 		try {
-			$total = (in_array($payable->getPayableCurrency(), $this->_zeroDecimalCurrencies)) ?
-				(int) $payable->getPayableAmount() :
-				(int) $payable->getPayableAmount() * 100;
+			$total = $this->getAmountToCharge($payable);
 
 			$charge = $this->_charge->create(
 				$total,
@@ -139,6 +137,13 @@ class Gateway implements GatewayInterface
 
 			throw $e;
 		}
+	}
+
+	public function getAmountToCharge(PayableInterface $payable)
+	{
+		return (in_array($payable->getPayableCurrency(), $this->_zeroDecimalCurrencies)) ?
+			(int) $payable->getPayableAmount() :
+			(int) ($payable->getPayableAmount() * 100);
 	}
 
 	protected function _setPublishableKey($publishableKey)

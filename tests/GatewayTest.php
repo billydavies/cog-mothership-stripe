@@ -144,6 +144,47 @@ class GatewayTest extends \PHPUnit_Framework_TestCase
 		$this->_gateway->purchase($this->_payable);
 	}
 
+	public function testGetAmountToChargeStandardCurrency()
+	{
+		$pounds = 100;
+		$pence  = $pounds * 100;
+
+		$this->_payable
+			->shouldReceive('getPayableCurrency')
+			->once()
+			->andReturn('GBP');
+
+		$this->_payable
+			->shouldReceive('getPayableAmount')
+			->once()
+			->andReturn($pounds);
+
+		$this->assertSame(
+			$pence,
+			$this->_gateway->getAmountToCharge($this->_payable)
+		);
+	}
+
+	public function testGetAmountToChargeZeroDecimalCurrency()
+	{
+		$yen = 100;
+
+		$this->_payable
+			->shouldReceive('getPayableCurrency')
+			->once()
+			->andReturn('JPY');
+
+		$this->_payable
+			->shouldReceive('getPayableAmount')
+			->once()
+			->andReturn($yen);
+
+		$this->assertSame(
+			$yen,
+			$this->_gateway->getAmountToCharge($this->_payable)
+		);
+	}
+
 	public function testRefund()
 	{
 		$this->_wrapper

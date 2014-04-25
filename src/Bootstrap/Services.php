@@ -20,8 +20,8 @@ class Services implements ServicesInterface
 				$c['request'],
 				$c['stripe.charge.wrapper'],
 				$c['log.payments'],
-				$c['cfg']->stripe->secretKey,
-				$c['cfg']->stripe->publishableKey
+				$c['stripe.secret_key'],
+				$c['stripe.publishable_key']
 			);
 		};
 
@@ -37,7 +37,17 @@ class Services implements ServicesInterface
 			return $methods;
 		});
 
-		$services['stripe.checkout.form'] = $services->factory(function ($c) {
+		$services['stripe.secret_key'] = $services->factory(function($c) {
+			return ($c['cfg']->checkout->payment->useTestPayments) ?
+				$c['cfg']->stripe->testSecretKey : $c['cfg']->stripe->liveSecretKey;
+		});
+
+		$services['stripe.publishable_key'] = $services->factory(function($c) {
+			return ($c['cfg']->checkout->payment->useTestPayments) ?
+				$c['cfg']->stripe->testPublishableKey : $c['cfg']->stripe->livePublishableKey;
+		});
+
+		$services['stripe.checkout.form'] = $services->factory(function($c) {
 			return new \Message\Mothership\Stripe\Form\Checkout;
 		});
 
