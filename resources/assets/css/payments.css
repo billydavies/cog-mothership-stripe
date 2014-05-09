@@ -1,5 +1,18 @@
-/* Payment
------------------------------------------------------------- */
+/* ======================================================= */
+/*                                                         */
+/*                                                         */
+/*    Mothershp Stripe                                     */
+/*                                                         */
+/*                                                         */
+/* ======================================================= */
+/*
+/*    Style Sheet v1.0
+/*    Created by Aisling Brock
+/*
+/*
+/* ======================================================= */
+
+
 .payment {
 	width: 50%;
 	margin: auto;
@@ -12,6 +25,11 @@
 	padding: 5px 15px 5px 25px;
 	border: none;
 	font: bold 1em Georgia, serif;
+}
+
+.payment .billing-info,
+.payment .card-info {
+	border: 1px solid #e6e6e7;
 }
 
 .payment button[disabled=disabled],
@@ -64,12 +82,8 @@
 	font: normal 0.85em Georgia, serif;
 }
 
-.payment .card-number {
-	width: 200px;
-}
-
 .payment .form-row.cvc {
-	width: 280px;
+	width: 260px;
 }
 
 .payment .help {
@@ -83,7 +97,7 @@
 	display: inline-block;
 	overflow: hidden;
 	padding-left: 10px;
-	margin: 0px 0px 0px 5px;
+	margin: 7px 0px 0px 5px;
 	width: 19px;
 	height: 19px;
 	background: url(../images/info-icon.png) no-repeat 0 0;
@@ -96,7 +110,7 @@
 .payment .help p {
 	position: absolute;
 	left: 30px;
-	top: -5px;
+	top: 0px;
 	z-index: 99;
 	display: none;
 	margin-left: 7px;
@@ -116,7 +130,6 @@
 	border-right: 7px solid #bababa;
 	border-bottom: 7px solid transparent;
 	content: '';
-
 }
 
 .payment .total {

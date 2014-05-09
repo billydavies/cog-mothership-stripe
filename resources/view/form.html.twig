@@ -4,24 +4,24 @@
 	<span class="payment-errors"></span>
 	<div class="form-row">
 		<label>Card Number</label>
-		<input type="text" size="20" data-stripe="number" class="card-number" required="required" />
+		<input type="text" size="20" data-stripe="number" class="card-number" required="required"/>
 	</div>
 
 	<div class="form-row cvc">
 		<div class="help">
-				<span>Info</span>
+			<span>Info</span>
 
-				<p>{{ 'ms.stripe.card.cvc' | trans }}</p>
-			</div>
+			<p>{{ 'ms.stripe.card.cvc' | trans }}</p>
+		</div>
 		<label>CVC</label>
 		<input type="text" size="4" data-stripe="cvc" class="card-cvc"/>
 	</div>
 
 	<div class="form-row">
 		<label>Expiration</label>
-		<input type="text" size="2" data-stripe="exp-month" class="card-expiry-month" placeholder="MM" required="required" />
+		<input type="text" size="2" data-stripe="exp-month" class="card-expiry-month" placeholder="MM" required="required"/>
 		<span> / </span>
-		<input type="text" size="4" data-stripe="exp-year" class="card-expiry-year" placeholder="YYYY" required="required" />
+		<input type="text" size="4" data-stripe="exp-year" class="card-expiry-year" placeholder="YYYY" required="required"/>
 		<span>(MM/YYYY)</span>
 	</div>
 
@@ -30,6 +30,7 @@
 	{% endif %}
 
 	<div class="form-row total">
-		Total: {{ payable.payableAmount | price(payable.payableCurrency) }} <button type="submit">Pay</button>
+		Total: {{ payable.payableAmount | price(payable.payableCurrency) }}
+		<button type="submit">Pay</button>
 	</div>
 {{ form_end(form) }}

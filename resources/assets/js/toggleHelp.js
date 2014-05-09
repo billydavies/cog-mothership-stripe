@@ -2,8 +2,10 @@ jQuery(document).ready(function($) {
 
 	// Help Toggle (CVC)
 	$('.form-row .help span').click(function () {
-		// Toggle calculation
-		$('.form-row .help p').fadeToggle();
+		if ($('.form-row .help p').hasClass("open")) {
+			$('.form-row .help p').fadeOut().removeClass("open");
+		} else {
+			$('.form-row .help p').fadeIn().addClass("open");
+		}
 	});
-
 });
