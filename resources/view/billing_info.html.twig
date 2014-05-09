@@ -15,7 +15,7 @@
 		<div class="country-name">{{ address.country }}</div>
 	</div>
 
-	<div class="total">Total: {{ payable.payableTotal | price(payable.payableCurrency) }}</div>
+	<div class="total">Total: {{ payable.payableAmount | price(payable.payableCurrency) }}</div>
 
 
 </section>

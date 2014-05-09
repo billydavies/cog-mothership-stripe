@@ -42,9 +42,9 @@ class Wrapper
 	protected function _getDescription()
 	{
 		$description = 'Payment made by ' . $this->_user->getName();
-		$description .= (!$this->_user instanceof User\AnonymousUser) ?
+		$description .= ($this->_user instanceof User\User) ?
 			' (User ID: ' . $this->_user->id . ', Email: ' . $this->_user->email . ')' :
-			'';
+			' (User unknown)';
 
 		return $description;
 	}

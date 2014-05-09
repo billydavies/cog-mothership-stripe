@@ -2,3 +2,6 @@ ms.stripe:
   error:
     js: Something went wrong, please ensure that you have JavaScript enabled in your browser. If the problem persists, please contact us.
     generic: Something went wrong. Please try again, and contact us if the problem persists.
+  card:
+    security: ''
+    cvc: The card security code is located on the back of credit or debit cards and is typically a separate group of 3 digits to the right of the signature strip.

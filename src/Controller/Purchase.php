@@ -88,13 +88,6 @@ class Purchase extends Controller implements PurchaseControllerInterface
 		return $this->redirect($response->getTargetUrl());
 	}
 
-	protected function _getResponseUrl(Response $response)
-	{
-		$response = json_decode($response->getContent());
-
-		return $response->url;
-	}
-
 	protected function _getSessionVars()
 	{
 		return [

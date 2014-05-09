@@ -11,8 +11,7 @@
 		<div class="help">
 				<span>Info</span>
 
-				<p>The card security code is located on the back of credit or debit cards and is typically a separate group
-					of 3 digits to the right of the signature strip.</p>
+				<p>{{ 'ms.stripe.card.cvc' | trans }}</p>
 			</div>
 		<label>CVC</label>
 		<input type="text" size="4" data-stripe="cvc" class="card-cvc"/>
@@ -26,9 +25,11 @@
 		<span>(MM/YYYY)</span>
 	</div>
 
-	<div class="security-info"><p>Security information. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tincidunt elementum diam et feugiat.</p></div>
+	{% if ('ms.stripe.card.security' | trans) %}
+		<div class="security-info"><p>{{ 'ms.stripe.card.security' | trans }}</p></div>
+	{% endif %}
 
 	<div class="form-row total">
-		Total: {{ payable.payableTotal | price(payable.payableCurrency) }} <button type="submit">Pay</button>
+		Total: {{ payable.payableAmount | price(payable.payableCurrency) }} <button type="submit">Pay</button>
 	</div>
 {{ form_end(form) }}
