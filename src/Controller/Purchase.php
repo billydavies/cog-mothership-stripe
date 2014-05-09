@@ -85,7 +85,7 @@ class Purchase extends Controller implements PurchaseControllerInterface
 	{
 		$response = $this->forward($stages['failure'], ['payable' => $payable]);
 
-		return $this->redirect($response->getTargetUrl());
+		return $this->redirect($this->generateUrl('ms.ecom.checkout.stripe.card'));
 	}
 
 	protected function _getSessionVars()
