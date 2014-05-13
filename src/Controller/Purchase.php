@@ -3,6 +3,7 @@
 namespace Message\Mothership\Stripe\Controller;
 
 use Message\Cog\Controller\Controller;
+use Message\Mothership\Commerce\Order\Order;
 use Message\Mothership\Ecommerce\Controller\Gateway\PurchaseControllerInterface;
 use Message\Mothership\Commerce\Payable\PayableInterface;
 use Message\Cog\HTTP\Response;
@@ -17,9 +18,10 @@ use Message\Cog\HTTP\Response;
 class Purchase extends Controller implements PurchaseControllerInterface
 {
 	// Session keys for purchase() vars
-	const PAYABLE_KEY = 'stripe.checkout.payable';
+	const PAYABLE_KEY = 'stripe.payable';
 	const STAGES_KEY  = 'stripe.checkout.stages';
 	const OPTIONS_KEY = 'stripe.checkout.options';
+	const ADDRESS_KEY = 'stripe.checkout.address';
 
 	public function purchase(PayableInterface $payable, array $stages, array $options = null)
 	{
@@ -27,23 +29,24 @@ class Purchase extends Controller implements PurchaseControllerInterface
 		$this->get('http.session')->set(self::STAGES_KEY, $stages);
 		$this->get('http.session')->set(self::OPTIONS_KEY, $options);
 
-		return $this->redirect($this->generateUrl('ms.ecom.checkout.stripe.card'));
+		// Store billing address in session as $payable loses its address loader during the serialization process
+		$this->get('http.session')->set(self::ADDRESS_KEY, $payable->getPayableAddress('billing'));
+
+		$route = ($payable instanceof Order) ?
+			'ms.ecom.checkout.stripe.card' :
+			'ms.ecom.stripe.card';
+
+		return $this->redirectToRoute($route);
+	}
+
+	public function cardDetailsCheckout()
+	{
+		return $this->_cardDetails('Message:Mothership:Stripe::card_details_checkout');
 	}
 
 	public function cardDetails()
 	{
-		$payable = $this->get('http.session')->get(self::PAYABLE_KEY);
-
-		if (!$payable) {
-			throw new \UnexpectedValueException('No payable object found in session');
-		}
-
-		return $this->render('Message:Mothership:Stripe::card_details', [
-			'form'           => $this->createForm($this->get('stripe.checkout.form')),
-			'payable'        => $payable,
-			'address'        => $payable->getPayableAddress('billing'),
-			'publishableKey' => $this->get('gateway.adapter.stripe')->getPublishableKey(),
-		]);
+		return $this->_cardDetails('Message:Mothership:Stripe::card_details');
 	}
 
 	public function purchaseAction()
@@ -81,11 +84,29 @@ class Purchase extends Controller implements PurchaseControllerInterface
 		return $this->redirect($data->url);
 	}
 
+	protected function _cardDetails($viewPath)
+	{
+		$payable = $this->get('http.session')->get(self::PAYABLE_KEY);
+
+		if (!$payable instanceof PayableInterface) {
+			throw new \UnexpectedValueException(
+				'`' . self::PAYABLE_KEY . '` in session must be instance of PayableInterface, ' . gettype($payable) . ' given'
+			);
+		}
+
+		return $this->render($viewPath, [
+			'form'           => $this->createForm($this->get('stripe.checkout.form')),
+			'payable'        => $payable,
+			'address'        => $this->get('http.session')->get(self::ADDRESS_KEY),
+			'publishableKey' => $this->get('gateway.adapter.stripe')->getPublishableKey(),
+		]);
+	}
+
 	protected function _redirectOnFailure(PayableInterface $payable, $stages)
 	{
 		$response = $this->forward($stages['failure'], ['payable' => $payable]);
 
-		return $this->redirect($this->generateUrl('ms.ecom.checkout.stripe.card'));
+		return $this->redirect($this->generateUrl('ms.ecom.stripe.card'));
 	}
 
 	protected function _getSessionVars()
