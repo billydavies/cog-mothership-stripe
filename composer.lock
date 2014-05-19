@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "a9ed81ce64c1ebc562cf7346b95a0d54",
+    "hash": "e1378eee383f148ba540ff85d19c4ad0",
     "packages": [
         {
             "name": "filp/whoops",
@@ -682,16 +682,16 @@
         },
         {
             "name": "message/cog-mothership-commerce",
-            "version": "dev-compatibility-types-loading-payments",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "git@github.com:messagedigital/cog-mothership-commerce.git",
-                "reference": "4f055f1125595774ac0f348dcfd77059158521e6"
+                "reference": "2.2.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/messagedigital/cog-mothership-commerce/zipball/4f055f1125595774ac0f348dcfd77059158521e6",
-                "reference": "4f055f1125595774ac0f348dcfd77059158521e6",
+                "url": "https://api.github.com/repos/messagedigital/cog-mothership-commerce/zipball/2.2.0",
+                "reference": "2.2.0",
                 "shasum": ""
             },
             "require": {
@@ -732,9 +732,9 @@
             "support": {
                 "wiki": "http://server.local/wiki/projects/cog",
                 "issues": "http://github.com/messagedigital/cog-mothership-commerce/issues",
-                "source": "https://github.com/messagedigital/cog-mothership-commerce/tree/compatibility-types-loading-payments"
+                "source": "https://github.com/messagedigital/cog-mothership-commerce/tree/2.2.0"
             },
-            "time": "2014-04-23 15:33:08"
+            "time": "2014-05-06 13:03:29"
         },
         {
             "name": "message/cog-mothership-cp",
@@ -789,16 +789,16 @@
         },
         {
             "name": "message/cog-mothership-ecommerce",
-            "version": "dev-feature/payment-refactor",
+            "version": "1.4.2",
             "source": {
                 "type": "git",
                 "url": "git@github.com:messagedigital/cog-mothership-ecommerce.git",
-                "reference": "258cb879d8954ac601d44dcf4c453e8507063153"
+                "reference": "1.4.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/messagedigital/cog-mothership-ecommerce/zipball/258cb879d8954ac601d44dcf4c453e8507063153",
-                "reference": "258cb879d8954ac601d44dcf4c453e8507063153",
+                "url": "https://api.github.com/repos/messagedigital/cog-mothership-ecommerce/zipball/1.4.2",
+                "reference": "1.4.2",
                 "shasum": ""
             },
             "require": {
@@ -806,14 +806,8 @@
                 "message/cog-mothership-commerce": "~2.0",
                 "message/cog-mothership-cp": "~1.1",
                 "message/cog-mothership-user": "~3.0",
-                "omnipay/common": "~2.0",
+                "omnipay/omnipay": "v1.0.3",
                 "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "mockery/mockery": "dev-master"
-            },
-            "suggest": {
-                "message/cog-mothership-sagepay": "The SagePay gateway integration for mothership"
             },
             "type": "library",
             "autoload": {
@@ -845,9 +839,9 @@
             "support": {
                 "wiki": "http://server.local/wiki/projects/cog",
                 "issues": "http://github.com/messagedigital/cog-mothership-ecommerce/issues",
-                "source": "https://github.com/messagedigital/cog-mothership-ecommerce/tree/feature/payment-refactor"
+                "source": "https://github.com/messagedigital/cog-mothership-ecommerce/tree/1.4.2"
             },
-            "time": "2014-05-09 14:59:35"
+            "time": "2014-05-13 11:31:33"
         },
         {
             "name": "message/cog-mothership-file-manager",
@@ -960,16 +954,16 @@
         },
         {
             "name": "message/cog-user",
-            "version": "1.1.0",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "git@github.com:messagedigital/cog-user.git",
-                "reference": "1.1.0"
+                "reference": "1.2.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/messagedigital/cog-user/zipball/1.1.0",
-                "reference": "1.1.0",
+                "url": "https://api.github.com/repos/messagedigital/cog-user/zipball/1.2.0",
+                "reference": "1.2.0",
                 "shasum": ""
             },
             "require": {
@@ -1004,9 +998,9 @@
             "support": {
                 "wiki": "http://server.local/wiki/projects/cog",
                 "issues": "http://github.com/messagedigital/cog-user/issues",
-                "source": "https://github.com/messagedigital/cog-user/tree/1.1.0"
+                "source": "https://github.com/messagedigital/cog-user/tree/1.2.0"
             },
-            "time": "2014-03-18 14:37:33"
+            "time": "2014-05-12 15:49:57"
         },
         {
             "name": "message/wkhtmltopdf",
@@ -1210,17 +1204,17 @@
             "time": "2013-07-02 20:53:35"
         },
         {
-            "name": "omnipay/common",
-            "version": "v2.3.0",
+            "name": "omnipay/omnipay",
+            "version": "v1.0.3",
             "source": {
                 "type": "git",
-                "url": "https://github.com/omnipay/common.git",
-                "reference": "f7d50ce82f3528e7402500d8722391ebb69070b8"
+                "url": "https://github.com/omnipay/omnipay.git",
+                "reference": "2145cd43e467f41f66bfc41347f9e97b5bf20d37"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/omnipay/common/zipball/f7d50ce82f3528e7402500d8722391ebb69070b8",
-                "reference": "f7d50ce82f3528e7402500d8722391ebb69070b8",
+                "url": "https://api.github.com/repos/omnipay/omnipay/zipball/2145cd43e467f41f66bfc41347f9e97b5bf20d37",
+                "reference": "2145cd43e467f41f66bfc41347f9e97b5bf20d37",
                 "shasum": ""
             },
             "require": {
@@ -1229,57 +1223,18 @@
                 "symfony/http-foundation": "~2.1"
             },
             "require-dev": {
-                "omnipay/tests": "~2.0"
+                "guzzle/plugin-mock": "~3.1",
+                "mockery/mockery": "~0.7",
+                "phpunit/phpunit": "~3.7.16",
+                "silex/silex": "1.0.*@dev",
+                "squizlabs/php_codesniffer": "~1.4.4",
+                "twig/twig": "~1.12"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0.x-dev"
-                },
-                "gateways": [
-                    "AuthorizeNet_AIM",
-                    "AuthorizeNet_SIM",
-                    "Buckaroo",
-                    "Buckaroo_Ideal",
-                    "Buckaroo_PayPal",
-                    "CardSave",
-                    "Coinbase",
-                    "Dummy",
-                    "Eway_Rapid",
-                    "FirstData_Connect",
-                    "GoCardless",
-                    "Manual",
-                    "Migs_ThreeParty",
-                    "Migs_TwoParty",
-                    "Mollie",
-                    "MultiSafepay",
-                    "Netaxept",
-                    "NetBanx",
-                    "PayFast",
-                    "Payflow_Pro",
-                    "PaymentExpress_PxPay",
-                    "PaymentExpress_PxPost",
-                    "PayPal_Express",
-                    "PayPal_Pro",
-                    "Pin",
-                    "SagePay_Direct",
-                    "SagePay_Server",
-                    "SecurePay_DirectPost",
-                    "Stripe",
-                    "TargetPay_Directebanking",
-                    "TargetPay_Ideal",
-                    "TargetPay_Mrcash",
-                    "TwoCheckout",
-                    "WorldPay"
-                ]
-            },
             "autoload": {
                 "psr-0": {
-                    "Omnipay\\Common\\": "src/"
-                },
-                "classmap": [
-                    "src/Omnipay/Omnipay.php"
-                ]
+                    "Omnipay": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1289,23 +1244,49 @@
                 {
                     "name": "Adrian Macneil",
                     "email": "adrian@adrianmacneil.com"
-                },
-                {
-                    "name": "Omnipay Contributors",
-                    "homepage": "https://github.com/omnipay/common/contributors"
                 }
             ],
-            "description": "Common components for Omnipay payment processing library",
-            "homepage": "https://github.com/omnipay/common",
+            "description": "A framework agnostic, multi-gateway payment processing library",
+            "homepage": "https://github.com/adrianmacneil/omnipay",
             "keywords": [
+                "2checkout",
+                "2co",
+                "auth.net",
+                "authorize",
+                "authorize.net",
+                "buckaroo",
+                "cardsave",
+                "commweb",
+                "dps",
+                "egate",
+                "eway",
+                "express",
                 "gateway",
+                "gocardless",
+                "ideal",
                 "merchant",
-                "omnipay",
+                "migs",
+                "mollie",
+                "netaxept",
+                "netbanx",
                 "pay",
+                "payfast",
+                "payflow",
                 "payment",
-                "purchase"
+                "paymentexpress",
+                "paypal",
+                "pin",
+                "purchase",
+                "rapid",
+                "sagepay",
+                "securepay",
+                "stripe",
+                "tala",
+                "tala-payments",
+                "twocheckout",
+                "worldpay"
             ],
-            "time": "2014-05-12 00:54:17"
+            "time": "2013-08-28 16:13:54"
         },
         {
             "name": "pimple/pimple",
@@ -1395,16 +1376,16 @@
         },
         {
             "name": "stripe/stripe-php",
-            "version": "v1.13.0",
+            "version": "v1.13.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stripe/stripe-php.git",
-                "reference": "1506a8eedb31b523a3b4a38a3b0df60fd5fde69b"
+                "reference": "2c9c690a463f9642bfa0b25a832bd8238f725ab7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/1506a8eedb31b523a3b4a38a3b0df60fd5fde69b",
-                "reference": "1506a8eedb31b523a3b4a38a3b0df60fd5fde69b",
+                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/2c9c690a463f9642bfa0b25a832bd8238f725ab7",
+                "reference": "2c9c690a463f9642bfa0b25a832bd8238f725ab7",
                 "shasum": ""
             },
             "require": {
@@ -1439,7 +1420,7 @@
                 "payment processing",
                 "stripe"
             ],
-            "time": "2014-04-10 07:01:37"
+            "time": "2014-05-15 23:57:04"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -2772,12 +2753,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/padraic/mockery.git",
-                "reference": "715721895260a951d9cb9c2b9269d5333fb37a5e"
+                "reference": "9e4914ac854fc0d900f93621a989e191eaafc7b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padraic/mockery/zipball/715721895260a951d9cb9c2b9269d5333fb37a5e",
-                "reference": "715721895260a951d9cb9c2b9269d5333fb37a5e",
+                "url": "https://api.github.com/repos/padraic/mockery/zipball/9e4914ac854fc0d900f93621a989e191eaafc7b8",
+                "reference": "9e4914ac854fc0d900f93621a989e191eaafc7b8",
                 "shasum": ""
             },
             "require": {
@@ -2830,27 +2811,14 @@
                 "test double",
                 "testing"
             ],
-            "time": "2014-05-02 12:25:43"
+            "time": "2014-05-19 08:14:43"
         }
     ],
     "aliases": [
-        {
-            "alias": "2.1.0",
-            "alias_normalized": "2.1.0.0",
-            "version": "dev-compatibility-types-loading-payments",
-            "package": "message/cog-mothership-commerce"
-        },
-        {
-            "alias": "1.4.0",
-            "alias_normalized": "1.4.0.0",
-            "version": "dev-feature/payment-refactor",
-            "package": "message/cog-mothership-ecommerce"
-        }
+
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "message/cog-mothership-commerce": 20,
-        "message/cog-mothership-ecommerce": 20,
         "mockery/mockery": 20
     },
     "platform": {

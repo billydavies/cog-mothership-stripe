@@ -36,6 +36,7 @@ class Purchase extends Controller implements PurchaseControllerInterface
 			'ms.ecom.checkout.stripe.card' :
 			'ms.ecom.stripe.card';
 
+
 		return $this->redirectToRoute($route);
 	}
 

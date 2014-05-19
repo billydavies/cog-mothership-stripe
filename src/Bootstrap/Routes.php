@@ -16,7 +16,7 @@ class Routes implements RoutesInterface
 		// checkout
 		$router['ms.ecom.checkout']->add('ms.ecom.checkout.stripe.card.action', 'payment', 'Message:Mothership:Stripe::Controller:Purchase#purchaseAction')
 		->setMethod('POST');
-		$router['ms.ecom.checkout']->add('ms.ecom.checkout.stripe.card', 'payment', 'Message:Mothership:Stripe::Controller:Purchase#cardDetails');
+		$router['ms.ecom.checkout']->add('ms.ecom.checkout.stripe.card', 'payment', 'Message:Mothership:Stripe::Controller:Purchase#cardDetailsCheckout');
 
 		// all other payments
 		$router['ms.ecom.stripe']->setPrefix('/stripe');
