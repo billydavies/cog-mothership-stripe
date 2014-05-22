@@ -38,12 +38,12 @@ class Services implements ServicesInterface
 		});
 
 		$services['stripe.secret_key'] = $services->factory(function($c) {
-			return ($c['cfg']->checkout->payment->useTestPayments) ?
+			return ($c['cfg']->payment->useTestPayments) ?
 				$c['cfg']->stripe->testSecretKey : $c['cfg']->stripe->liveSecretKey;
 		});
 
 		$services['stripe.publishable_key'] = $services->factory(function($c) {
-			return ($c['cfg']->checkout->payment->useTestPayments) ?
+			return ($c['cfg']->payment->useTestPayments) ?
 				$c['cfg']->stripe->testPublishableKey : $c['cfg']->stripe->livePublishableKey;
 		});
 
