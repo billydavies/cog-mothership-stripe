@@ -1,0 +1,201 @@
+/* ======================================================= */
+/*                                                         */
+/*                                                         */
+/*    Mothershp Stripe                                     */
+/*                                                         */
+/*                                                         */
+/* ======================================================= */
+/*
+/*    Style Sheet v1.0
+/*    Created by Aisling Brock
+/*
+/*
+/* ======================================================= */
+
+
+.payment {
+	width: 50%;
+	margin: auto;
+}
+
+.payment button {
+	background: #333 url(../images/lock.png) 10px center no-repeat;
+	color: #fefefe;
+	margin: 0px;
+	padding: 5px 15px 5px 25px;
+	border: none;
+	font: bold 1em Georgia, serif;
+}
+
+.payment .billing-info,
+.payment .card-info {
+	border: 1px solid #e6e6e7;
+}
+
+.payment button[disabled=disabled],
+.payment button:disabled,
+.payment button[disabled=disabled]:hover,
+.payment button:disabled:hover {
+	opacity: 0.1;
+}
+
+.payment input {
+	padding: 5px;
+	font: bold 1.25em Georgia, serif;
+}
+
+.payment .billing-info {
+	margin: 0px 0px 20px 0px;
+	padding: 10px;
+}
+
+.payment .card-info {
+	padding: 10px;
+}
+
+.payment .billing-info .adr {
+	margin: 10px 0px;
+}
+
+.payment .billing-info h3 {
+	margin: 0px;
+}
+
+.payment .form-row {
+	margin: 0px 0px 10px 0px;
+}
+
+.payment .form-row.total {
+	float: right;
+	clear: both;
+	margin: 20px 0px;
+}
+
+.payment .form-row label {
+	font: bold 1em Georgia, serif;
+	margin: 0px 10px 0px 0px;
+	width: 130px;
+	display: inline-block;
+}
+
+.payment .form-row label span {
+	font: normal 0.85em Georgia, serif;
+}
+
+.payment .form-row.cvc {
+	width: 260px;
+}
+
+.payment .help {
+	position: relative;
+	margin: 0px;
+	float: right;
+}
+
+.payment .help span {
+	position: relative;
+	display: inline-block;
+	overflow: hidden;
+	padding-left: 10px;
+	margin: 7px 0px 0px 5px;
+	width: 19px;
+	height: 19px;
+	background: url(../images/info-icon.png) no-repeat 0 0;
+	text-indent: -999em;
+	content: '?';
+	text-transform: lowercase;
+	cursor: help;
+}
+
+.payment .help p {
+	position: absolute;
+	left: 30px;
+	top: 0px;
+	z-index: 99;
+	display: none;
+	margin-left: 7px;
+	padding: 10px 10px 10px 10px;
+	width: 270px;
+	background: #bababa;
+	font-size: 0.857em;
+}
+
+.payment .help p:before {
+	position: absolute;
+	top: 8px;
+	left: -7px;
+	width: 0px;
+	height: 0px;
+	border-top: 7px solid transparent;
+	border-right: 7px solid #bababa;
+	border-bottom: 7px solid transparent;
+	content: '';
+}
+
+.payment .total {
+	font: bold 1.2em Georgia, serif;
+}
+
+.payment .cards {
+	margin: 0px 0px 0px 0px;
+	overflow: hidden;
+	width: 50%;
+}
+
+.cards h4,
+.cards ul {
+	float: left;
+	font: normal 1em Georgia, serif;
+}
+
+.cards h4 {
+	margin: 0px 15px 0px 0px;
+	font: bold 1em Georgia, serif;
+}
+
+.cards li {
+	float: left;
+	list-style: none;
+	text-indent: -999em;
+	margin: 0px 5px 0px 0px;
+}
+
+.cards .visa {
+	background: url(../images/visa.gif) no-repeat 0 0;
+	width: 39px;
+	height: 25px;
+}
+
+.cards .mastercard {
+	background: url(../images/mastercard.gif) no-repeat 0 0;
+	width: 41px;
+	height: 25px;
+}
+
+.cards .amex {
+	background: url(../images/amex.gif) no-repeat 0 0;
+	width: 25px;
+	height: 25px;
+}
+
+.payment-errors {
+	color: #c90513;
+	display: block;
+	margin: 0px 0px 20px 0px;
+}
+
+.security-info {
+	font: normal 0.85em Georgia, serif;
+	line-height: 100%;
+	margin: 10px 0px;
+}
+
+.security-info:before {
+	content: '';
+	background: url(../images/lock-green.png) center no-repeat;
+	width: 8px;
+	height: 10px;
+	display: block;
+	float: left;
+	padding: 10px 10px 0px 0px;
+}

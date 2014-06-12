@@ -16,8 +16,8 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"Message\\Mothership\\SagePay\\"      : "src",
-			"Message\\Mothership\\SagePay\\Test\\": "tests"
+			"Message\\Mothership\\Stripe\\"      : "src",
+			"Message\\Mothership\\Stripe\\Test\\": "tests"
 		}
 	},
 	"repositories": [
@@ -30,10 +30,10 @@
 		"php": ">=5.4.0",
 
 		"message/cog"                     : "~3.0",
-		"message/cog-mothership-commerce" : "dev-feature/payment-refactor as 2.1.0",
-		"message/cog-mothership-ecommerce": "dev-feature/payment-refactor as 1.4.0",
+		"message/cog-mothership-commerce" : "~3.0",
+		"message/cog-mothership-ecommerce": "~2.0",
 
-		"stripe/stripe-php"               : "dev-master as 1.0.0"
+		"stripe/stripe-php"               : "~1.13"
 	},
 	"require-dev": {
 		"mockery/mockery": "dev-master"
