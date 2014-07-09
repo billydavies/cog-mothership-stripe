@@ -1,6 +1,7 @@
 {% extends 'Message:Mothership:Stripe::template' %}
 
 {% block javascripts %}
+	{{ parent() }}
 	{% include 'Message:Mothership:Stripe::javascript' with { 'parent': parent() } %}
 {% endblock %}
 

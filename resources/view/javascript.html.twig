@@ -1,5 +1,4 @@
-{% block javascripts %}
-	{{ parent }}
+{#{% block javascripts %}#}
 	{% javascripts
 		'@Message:Mothership:Stripe::resources:assets:js:stripeResponse.js'
 		'@Message:Mothership:Stripe::resources:assets:js:toggleHelp.js'
@@ -45,4 +44,4 @@
 		Stripe.setPublishableKey('{{ publishableKey }}');
 	</script>
 	{% endjavascripts %}
-{% endblock %}
+{#{% endblock %}#}
