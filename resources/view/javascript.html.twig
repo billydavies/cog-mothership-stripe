@@ -1,48 +1,45 @@
-{% block javascripts %}
-	{{ parent }}
-	{% javascripts
-		'@Message:Mothership:Stripe::resources:assets:js:stripeResponse.js'
-		'@Message:Mothership:Stripe::resources:assets:js:toggleHelp.js'
+{% javascripts
+	'@Message:Mothership:Stripe::resources:assets:js:stripeResponse.js'
+	'@Message:Mothership:Stripe::resources:assets:js:toggleHelp.js'
 
-		output='/assets/js/stripe.js'
-		filter='?jsmin'
-	%}
+	output='/assets/js/stripe.js'
+	filter='?jsmin'
+%}
 
-	<script src="{{ asset_url }}"></script>
-	<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-	<script type="text/javascript">
-		jQuery(function($) {
-			$('#payment-form').submit(function(event) {
-				var $form = $(this);
+<script src="{{ asset_url }}"></script>
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<script type="text/javascript">
+	jQuery(function($) {
+		$('#payment-form').submit(function(event) {
+			var $form = $(this);
 
-				// Disable the submit button to prevent repeated clicks
-				$form.find('button').prop('disabled', true);
+			// Disable the submit button to prevent repeated clicks
+			$form.find('button').prop('disabled', true);
 
-				Stripe.card.createToken({
-					number: $('.card-number').val(),
-					cvc: $('.card-cvc').val(),
-					exp_month: $('.card-expiry-month').val(),
-					exp_year: $('.card-expiry-year').val(),
-					address_line1: '{{ address.lines[1] }}',
-					{% if address.lines[2] | length > 0 %}
-						address_line2: '{{ address.lines[2] }}',
-					{% endif %}
-					{% if address.town | length > 0 %}
-						address_city: '{{ address.town }}',
-					{% endif %}
-					{% if address.state | length > 0 %}
-						address_state: '{{ address.state }}',
-					{% endif %}
-					address_zip: '{{ address.postcode }}',
-					address_country: '{{ address.countryID }}'
-				}, stripeResponseHandler);
+			Stripe.card.createToken({
+				number: $('.card-number').val(),
+				cvc: $('.card-cvc').val(),
+				exp_month: $('.card-expiry-month').val(),
+				exp_year: $('.card-expiry-year').val(),
+				address_line1: '{{ address.lines[1] }}',
+				{% if address.lines[2] | length > 0 %}
+					address_line2: '{{ address.lines[2] }}',
+				{% endif %}
+				{% if address.town | length > 0 %}
+					address_city: '{{ address.town }}',
+				{% endif %}
+				{% if address.state | length > 0 %}
+					address_state: '{{ address.state }}',
+				{% endif %}
+				address_zip: '{{ address.postcode }}',
+				address_country: '{{ address.countryID }}'
+			}, stripeResponseHandler);
 
-				// Prevent the form from submitting with the default action
-				return false;
-			});
+			// Prevent the form from submitting with the default action
+			return false;
 		});
+	});
 
-		Stripe.setPublishableKey('{{ publishableKey }}');
-	</script>
-	{% endjavascripts %}
-{% endblock %}
+	Stripe.setPublishableKey('{{ publishableKey }}');
+</script>
+{% endjavascripts %}

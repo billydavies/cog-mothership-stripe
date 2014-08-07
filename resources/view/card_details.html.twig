@@ -1,3 +1,10 @@
 {% extends 'Message:Mothership:Stripe::template' %}
 
-{% include 'Message:Mothership:Stripe::_card_details' %}
+{% block javascripts %}
+	{{ parent() }}
+	{% include 'Message:Mothership:Stripe::javascript' with { 'parent': parent() } %}
+{% endblock %}
+
+{% block content %}
+	{% include 'Message:Mothership:Stripe::_card_details' %}
+{% endblock %}
