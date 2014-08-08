@@ -1,7 +1,3 @@
-{% block javascripts %}
-	{% include 'Message:Mothership:Stripe::javascript' with { 'parent': parent() } %}
-{% endblock %}
-
 {% block content %}
 	{% include 'Message:Mothership:Stripe::billing_info' %}
 	<div class="cards"><h4>Cards Accepted</h4>
