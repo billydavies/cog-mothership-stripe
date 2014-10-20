@@ -2,11 +2,13 @@
 
 namespace Message\Mothership\Stripe\Controller;
 
+use Message\Mothership\Stripe\Exception;
+
 use Message\Cog\Controller\Controller;
 use Message\Mothership\Commerce\Order\Order;
 use Message\Mothership\Ecommerce\Controller\Gateway\PurchaseControllerInterface;
 use Message\Mothership\Commerce\Payable\PayableInterface;
-use Message\Cog\HTTP\Response;
+use Message\Mothership\Commerce\Order\Entity\Address\Address;
 
 /**
  * Controller for purchases using the Stripe server gateway integration.
@@ -55,6 +57,7 @@ class Purchase extends Controller implements PurchaseControllerInterface
 		list($payable, $stages, $options) = $this->_getSessionVars();
 
 		try {
+			$this->_validatePayable($payable);
 			$charge = $this->get('gateway.adapter.stripe')->purchase($payable);
 		}
 		catch (\Stripe_CardError $e) {
@@ -64,6 +67,11 @@ class Purchase extends Controller implements PurchaseControllerInterface
 		}
 		catch (\Stripe_InvalidRequestError $e) {
 			$this->addFlash('error', $this->trans('ms.stripe.error.js'));
+
+			return $this->_redirectOnFailure($payable, $stages);
+		}
+		catch (Exception\PayableNotValidException $e) {
+			$this->addFlash('error', $e->getMessage());
 
 			return $this->_redirectOnFailure($payable, $stages);
 		}
@@ -83,6 +91,28 @@ class Purchase extends Controller implements PurchaseControllerInterface
 		$data    = json_decode($content);
 
 		return $this->redirect($data->url);
+	}
+
+	private function _validatePayable(PayableInterface $payable)
+	{
+		if ($payable instanceof Order) {
+			$this->_validateOrder($payable);
+		}
+	}
+
+	private function _validateOrder(Order $order)
+	{
+		if ($order->user !== $this->get('user.current')) {
+			throw new Exception\PayableNotValidException($this->trans('ms.stripe.error.user'));
+		}
+
+		if (count($order->addresses->getByProperty('type', Address::DELIVERY)) < 1) {
+			throw new Exception\PayableNotValidException($this->trans('ms.stripe.error.user'));
+		}
+
+		if (count($order->addresses->getByProperty('type', Address::BILLING)) < 1) {
+			throw new Exception\PayableNotValidException($this->trans('ms.stripe.error.user'));
+		}
 	}
 
 	protected function _cardDetails($viewPath)
