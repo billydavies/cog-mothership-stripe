@@ -37,3 +37,14 @@ The Stripe gateway never leaves Mothership, and instead uses JavaScript and PHP 
 
 * As noted in the API process above, the checkout form does not use Symfony Form to generate the fields. This is because the card data cannot be posted for security reasons. The form fields also have a `data-stripe` attribute. These are not actually used in our implementation of the gateway, as we want to add address details too, but if we wanted to, they allow for a simpler way to grab the form data.
 * Stripe accepts payment amounts in the lowest possible currency unit, so instead of submitting £1, we need to submit 100p. This is a little awkward as some currencies, such as Yen, are zero decimal currency and can't be broken down in the same way. The `Gateway` class has a protected property defining all zero decimal currency codes (according to Stripe's documentation). If a currency is not a zero decimal currency, the payment amount is multiplied by 100 and cast to an integer. As far as I'm aware there aren't any currencies that break down differently.
+
+## License
+
+Mothership E-Commerce
+Copyright (C) 2015 Jamie Freeman
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
