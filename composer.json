@@ -1,43 +1,41 @@
 {
-	"name": "message/cog-mothership-stripe",
-	"description": "Cog module for the Stripe gateway in Mothership",
-	"keywords": ["stripe", "mothership", "cog"],
-	"homepage": "http://message.co.uk",
-	"license": "proprietary",
-	"authors": [
-		{
-			"name" : "The Message Development Team",
-			"email": "dev@message.co.uk"
-		}
-	],
-	"support": {
-		"wiki"  : "http://server.local/wiki/projects/cog",
-		"issues": "http://github.com/messagedigital/cog-mothership-stripe/issues"
-	},
-	"autoload": {
-		"psr-4": {
-			"Message\\Mothership\\Stripe\\"      : "src",
-			"Message\\Mothership\\Stripe\\Test\\": "tests"
-		}
-	},
-	"repositories": [
-		{
-			"type": "composer",
-			"url" : "http://packages.message.co.uk"
-		}
-	],
-	"require": {
-		"php": ">=5.4.0",
+  "name": "mothership-ec/cog-mothership-stripe",
+  "description": "Cog module for the Stripe gateway in Mothership",
+  "keywords": [
+    "stripe",
+    "mothership",
+    "cog"
+  ],
+  "homepage": "http://mothership.ec",
+  "license": "GPL-3.0+",
+  "authors": [
+    {
+      "name": "The Mothership Development Team",
+      "email": "dev@mothership.ec"
+    }
+  ],
+  "support": {
+    "wiki": "http://wiki.mothership.ec/Stripe_module",
+    "issues": "http://github.com/mothership-ec/cog-mothership-stripe/issues"
+  },
+  "autoload": {
+    "psr-4": {
+      "Message\\Mothership\\Stripe\\": "src",
+      "Message\\Mothership\\Stripe\\Test\\": "tests"
+    }
+  },
+  "require": {
+    "php": ">=5.4.0",
 
-		"message/cog"                     : "~3.4",
-		"message/cog-mothership-commerce" : "~4.0",
-		"message/cog-mothership-ecommerce": "~2.2",
+    "mothership-ec/cog"                      : "~4.0",
+    "mothership-ec/cog-mothership-commerce"  : "~5.0",
+    "mothership-ec/cog-mothership-ecommerce" : "~3.0",
 
-		"stripe/stripe-php"               : "~1.13"
-	},
-	"require-dev": {
-		"mockery/mockery": "dev-master"
-	},
-	"suggest": {
-	}
+    "stripe/stripe-php": "~1.13"
+  },
+  "require-dev": {
+    "mockery/mockery": "dev-master"
+  },
+  "suggest": {
+  }
 }

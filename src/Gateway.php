@@ -141,7 +141,6 @@ class Gateway implements GatewayInterface
 		}
 	}
 
-	// best method name EVAR
 	public function getAmountBySmallestCurrencyUnit(PayableInterface $payable)
 	{
 		return (in_array($payable->getPayableCurrency(), $this->_zeroDecimalCurrencies)) ?
